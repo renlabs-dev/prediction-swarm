@@ -1,7 +1,7 @@
 ## Prediction Swarm
 
-> The Prediction Swarm is the first major product built on top of the Torus network’s agent abstractions.  
-Its core goal is simple but powerful: **predict who can predict the future.**
+> First swarm formed through Torus abstractions, over the problem space of finding the internet's prophets.  
+The goal is simple but powerful: **predict who can predict the future.**
 
 Across social media and markets, thousands of predictions are made every day. Most fade into noise. The swarm turns this into structured memory:  
 - Find predictions made on a given topic  
