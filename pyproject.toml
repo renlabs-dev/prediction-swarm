@@ -1,0 +1,42 @@
+[project]
+name = "swarm-evaluator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.16.5",
+    "psycopg2-binary>=2.9.10",
+    "pydantic>=2.11.7",
+    "requests>=2.32.5",
+    "sqlalchemy>=2.0.43",
+    "torusdk>=0.2.4.1",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "types-requests>=2.32.4.20250809",
+]
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
