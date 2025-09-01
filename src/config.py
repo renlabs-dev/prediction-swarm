@@ -51,6 +51,13 @@ class Config:
             7  # Look back 7 days for first run
         )
 
+        # Evaluation settings
+        self.EVALUATION_SAMPLE_SIZE: Final[int] = (
+            10  # Default number of predictions to evaluate
+        )
+        self.EVALUATION_MIN_SCORE: Final[int] = 0  # Minimum score
+        self.EVALUATION_MAX_SCORE: Final[int] = 100  # Maximum score
+
     def get_initial_start_date(self) -> datetime:
         """Get the hardcoded initial start date for predictions."""
         # Hardcoded start date: August 25, 2025 (7 days before Sep 1, 2025)

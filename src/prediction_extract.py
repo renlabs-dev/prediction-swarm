@@ -1,10 +1,9 @@
 from datetime import datetime, timezone
 from typing import List
 
-from db.db_service import db_service
-
 from .api_client import api_client
 from .config import CONFIG
+from .db.db_service import db_service
 from .schemas import Prediction
 
 

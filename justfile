@@ -13,33 +13,45 @@ db-stop:
 
 # Create a new migration
 migrate-create MESSAGE:
-    cd db && uv run alembic revision --autogenerate -m "{{MESSAGE}}"
+    cd src/db && uv run alembic revision --autogenerate -m "{{MESSAGE}}"
 
 # Apply all pending migrations
 migrate-up:
-    cd db && uv run alembic upgrade head
+    cd src/db && uv run alembic upgrade head
 
 # Rollback one migration
 migrate-down:
-    cd db && uv run alembic downgrade -1
+    cd src/db && uv run alembic downgrade -1
 
 # Show migration history
 migrate-history:
-    cd db && uv run alembic history
+    cd src/db && uv run alembic history
 
 # Show current migration
 migrate-current:
-    cd db && uv run alembic current
+    cd src/db && uv run alembic current
 
 # Show pending migrations
 migrate-pending:
-    cd db && uv run alembic heads
+    cd src/db && uv run alembic heads
 
 # Application Commands
 
 # Run the prediction extractor
 run:
     uv run python src/prediction_extract.py
+
+# Run the evaluation CLI
+evaluate:
+    uv run python -m src.evaluator
+
+# Run evaluation from a specific date (YYYY-MM-DD)
+evaluate-from DATE:
+    uv run python src/evaluator.py from {{DATE}}
+
+# Show evaluation statistics
+evaluate-stats:
+    uv run python src/evaluator.py stats
 
 # Run type checking
 typecheck:
@@ -58,11 +70,11 @@ format:
 # Initial setup: start db and create initial migration
 setup: db-start
     sleep 5
-    just migrate-create "Initial migration: add program iterations and address counts"
+    just migrate-create "Initial migration: add program iterations and evaluation tables"
     just migrate-up
 
 # Reset everything: clean database, start fresh, and setup
 reset: db-stop db-start
     sleep 5
-    just migrate-create "Initial migration: add program iterations and address counts"
+    just migrate-create "Initial migration: add program iterations and evaluation tables"
     just migrate-up
