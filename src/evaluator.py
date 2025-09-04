@@ -2,8 +2,8 @@
 """Interactive CLI for human evaluation of predictions."""
 
 import sys
-from datetime import datetime
-from typing import Dict, Optional
+from datetime import datetime, timedelta, timezone
+from typing import Dict, List, Optional, Protocol, Tuple
 
 from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
     Ss58Address,
@@ -12,7 +12,88 @@ from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
 from .api_client import api_client
 from .config import CONFIG
 from .db.db_service import db_service
+from .db.models import EvaluationSession
+from .openrouter_client import openrouter_client
 from .schemas import Prediction
+
+
+class ScoreProvider(Protocol):
+    """Protocol for providing prediction scores."""
+
+    def get_score(
+        self, prediction: Prediction, index: int, total: int
+    ) -> Optional[int]:
+        """Get score for a prediction.
+
+        Args:
+            prediction: The prediction to score
+            index: Current prediction index (1-based)
+            total: Total number of predictions
+
+        Returns:
+            Score (0-100), CONFIG.EVALUATION_INVALID_SCORE for invalid, or None to quit
+        """
+        ...
+
+
+def setup_evaluation_session(
+    evaluator_name: str, from_date: datetime, sample_size_per_address: int
+) -> Tuple[EvaluationSession, List[Prediction]]:
+    """Set up evaluation session with predictions sampling.
+
+    Args:
+        evaluator_name: Name of the evaluator
+        from_date: Start date for fetching predictions
+        sample_size_per_address: Number of predictions to sample per address
+
+    Returns:
+        Tuple of (evaluation_session, predictions_to_evaluate)
+
+    Raises:
+        Exception: If no predictions found or other errors occur
+    """
+    print(f"Fetching predictions since {from_date}...")
+
+    # Fetch predictions
+    all_predictions = api_client.fetch_all_predictions(from_date)
+
+    if not all_predictions:
+        raise Exception("No predictions found for the specified date range.")
+
+    # Show distribution by address before sampling
+    address_counts: Dict[Ss58Address, int] = {}
+    for pred in all_predictions:
+        addr = pred.inserted_by_address
+        address_counts[addr] = address_counts.get(addr, 0) + 1
+
+    print(
+        f"Found {len(all_predictions)} total predictions from {len(address_counts)} addresses:"
+    )
+    for addr, count in sorted(
+        address_counts.items(), key=lambda x: x[1], reverse=True
+    )[:10]:
+        print(f"  {addr[:8]}...{addr[-8:]}: {count} predictions")
+    if len(address_counts) > 10:
+        print(f"  ... and {len(address_counts) - 10} more addresses")
+
+    # Sample predictions for evaluation (fair per address)
+    predictions_to_evaluate = db_service.sample_predictions_for_evaluation(
+        all_predictions, sample_size_per_address
+    )
+
+    if not predictions_to_evaluate:
+        raise Exception(
+            "No new predictions to evaluate (all have already been evaluated)."
+        )
+
+    print(f"Sampling {sample_size_per_address} predictions per address...")
+    print(f"Total predictions to evaluate: {len(predictions_to_evaluate)}")
+
+    # Create evaluation session
+    session = db_service.create_evaluation_session(evaluator_name)
+    print(f"Started evaluation session {session.id}")
+
+    return session, predictions_to_evaluate
 
 
 def get_evaluator_name() -> str:
@@ -86,23 +167,23 @@ def display_prediction(
     print(f"\n{'='*80}")
     print(f"[{current}/{total}] Prediction ID: {prediction.id}")
     print(f"{'='*80}")
-    
+
     # Show full post
     print("FULL POST:")
     print(f"{prediction.full_post}")
     print(f"{'-'*80}")
-    
+
     # Show extracted prediction
     print("EXTRACTED PREDICTION:")
     print(f"{prediction.prediction}")
     print(f"{'-'*80}")
-    
+
     # Show context if available
     if prediction.context:
         print("CONTEXT:")
         print(f"{prediction.context}")
         print(f"{'-'*80}")
-    
+
     # Show metadata
     print("METADATA:")
     print(f"Posted by: {prediction.predictor_twitter_username}")
@@ -113,13 +194,53 @@ def display_prediction(
     print(f"{'='*80}")
 
 
-def get_score() -> Optional[int]:
+class ManualScoreProvider:
+    """Score provider for manual CLI evaluation."""
+
+    def get_score(
+        self, prediction: Prediction, index: int, total: int
+    ) -> Optional[int]:
+        """Get manual score from user input."""
+        display_prediction(prediction, index, total)
+        return get_manual_score()
+
+
+class LLMScoreProvider:
+    """Score provider for LLM-based evaluation."""
+
+    def get_score(
+        self, prediction: Prediction, index: int, total: int
+    ) -> Optional[int]:
+        """Get score from LLM evaluation."""
+        print(
+            f"[{index}/{total}] Evaluating prediction {prediction.id} with LLM..."
+        )
+        
+        # Get full response with score and reason
+        response = openrouter_client.evaluate_prediction_full(prediction)
+
+        if response is None:
+            print("  LLM evaluation failed - skipping")
+            return -1  # Skip this prediction
+
+        if response.score == "INVALID":
+            print("  LLM marked as INVALID")
+            if response.reason:
+                print(f"  Reason: {response.reason}")
+            return CONFIG.EVALUATION_INVALID_SCORE
+        else:
+            print(f"  LLM Score: {response.score}")
+            # Clamp score to valid range
+            return max(0, min(100, int(response.score)))
+
+
+def get_manual_score() -> Optional[int]:
     """Get score input from user."""
     while True:
         user_input = (
             input(
                 f"Score ({CONFIG.EVALUATION_MIN_SCORE}-{CONFIG.EVALUATION_MAX_SCORE}, "
-                "'s' to skip, 'q' to quit): "
+                "'i' for invalid, 's' to skip, 'q' to quit): "
             )
             .strip()
             .lower()
@@ -129,6 +250,8 @@ def get_score() -> Optional[int]:
             return None  # Signal to quit
         elif user_input == "s":
             return -1  # Signal to skip
+        elif user_input == "i":
+            return CONFIG.EVALUATION_INVALID_SCORE  # Signal invalid prediction
 
         try:
             score = int(user_input)
@@ -143,11 +266,91 @@ def get_score() -> Optional[int]:
                     f"Score must be between {CONFIG.EVALUATION_MIN_SCORE} and {CONFIG.EVALUATION_MAX_SCORE}"
                 )
         except ValueError:
-            print("Please enter a valid number, 's' to skip, or 'q' to quit")
+            print(
+                "Please enter a valid number, 'i' for invalid, 's' to skip, or 'q' to quit"
+            )
+
+
+def run_evaluation_with_provider(
+    score_provider: ScoreProvider,
+    evaluator_name: str,
+    from_date: Optional[datetime] = None,
+    sample_size_per_address: Optional[int] = None,
+) -> None:
+    """Run evaluation using the provided score provider.
+
+    Args:
+        score_provider: Provider for getting prediction scores
+        evaluator_name: Name of the evaluator
+        from_date: Start date for predictions (if None, will be determined)
+        sample_size_per_address: Sample size per address (if None, will be determined)
+    """
+    try:
+        # Setup evaluation session
+        session, predictions_to_evaluate = setup_evaluation_session(
+            evaluator_name,
+            from_date or datetime.now(timezone.utc),
+            sample_size_per_address or CONFIG.EVALUATION_SAMPLE_SIZE,
+        )
+
+        # Evaluate predictions
+        evaluated_count = 0
+        skipped_count = 0
+        invalid_count = 0
+
+        try:
+            for i, prediction in enumerate(predictions_to_evaluate, 1):
+                score = score_provider.get_score(
+                    prediction, i, len(predictions_to_evaluate)
+                )
+
+                if score is None:  # Quit requested
+                    print("\nEvaluation interrupted.")
+                    break
+                elif score == -1:  # Skip requested (manual only)
+                    print("Skipped.")
+                    skipped_count += 1
+                    continue
+                elif (
+                    score == CONFIG.EVALUATION_INVALID_SCORE
+                ):  # Invalid prediction
+                    invalid_count += 1
+                else:
+                    evaluated_count += 1
+
+                # Store evaluation
+                db_service.store_evaluation(
+                    session_id=session.id,
+                    prediction_id=prediction.id,
+                    prediction_text=prediction.prediction,
+                    finder_key=prediction.inserted_by_address,
+                    score=score,
+                )
+
+            # Complete session
+            db_service.complete_evaluation_session(session.id)
+
+            # Show summary
+            print(f"\n{'='*50}")
+            print("Evaluation Summary:")
+            print(f"Evaluated: {evaluated_count} predictions")
+            print(f"Invalid: {invalid_count} predictions")
+            if skipped_count > 0:
+                print(f"Skipped: {skipped_count} predictions")
+            print(f"Session ID: {session.id}")
+            print("Evaluation completed!")
+
+        except KeyboardInterrupt:
+            print("\n\nEvaluation interrupted. Session saved.")
+            db_service.complete_evaluation_session(session.id)
+
+    except Exception as e:
+        print(f"Error during evaluation: {e}")
+        return
 
 
 def run_evaluation(from_date: Optional[datetime] = None) -> None:
-    """Run the evaluation process."""
+    """Run manual evaluation process."""
     print("Welcome to the Prediction Evaluator!")
     print("=" * 50)
 
@@ -161,102 +364,40 @@ def run_evaluation(from_date: Optional[datetime] = None) -> None:
     # Get sample size per address
     sample_size_per_address = get_sample_size()
 
-    print(f"\nFetching predictions since {from_date}...")
-
-    # Fetch predictions
-    try:
-        # from_date should not be None at this point, but let's be safe
-        if from_date is None:
-            print("Error: No valid from_date provided")
-            return
-        all_predictions = api_client.fetch_all_predictions(from_date)
-    except Exception as e:
-        print(f"Error fetching predictions: {e}")
-        return
-
-    if not all_predictions:
-        print("No predictions found for the specified date range.")
-        return
-
-    # Show distribution by address before sampling
-    address_counts: Dict[Ss58Address, int] = {}
-    for pred in all_predictions:
-        addr = pred.inserted_by_address
-        address_counts[addr] = address_counts.get(addr, 0) + 1
-
-    print(
-        f"Found {len(all_predictions)} total predictions from {len(address_counts)} addresses:"
-    )
-    for addr, count in sorted(
-        address_counts.items(), key=lambda x: x[1], reverse=True
-    )[:10]:
-        print(f"  {addr[:8]}...{addr[-8:]}: {count} predictions")
-    if len(address_counts) > 10:
-        print(f"  ... and {len(address_counts) - 10} more addresses")
-
-    # Sample predictions for evaluation (fair per address)
-    predictions_to_evaluate = db_service.sample_predictions_for_evaluation(
-        all_predictions, sample_size_per_address
+    # Use unified evaluation engine with manual score provider
+    run_evaluation_with_provider(
+        ManualScoreProvider(),
+        evaluator_name,
+        from_date,
+        sample_size_per_address,
     )
 
-    if not predictions_to_evaluate:
-        print(
-            "No new predictions to evaluate (all have already been evaluated)."
-        )
+
+def run_llm_evaluation() -> None:
+    """Run LLM-based evaluation for predictions from the last day."""
+    print("Welcome to the LLM Prediction Evaluator!")
+    print("=" * 50)
+
+    # Test OpenRouter connection first
+    if not openrouter_client.test_connection():
+        print("Cannot proceed with LLM evaluation - OpenRouter connection failed.")
         return
 
-    print(f"Sampling {sample_size_per_address} predictions per address...")
-    print(f"Total predictions to evaluate: {len(predictions_to_evaluate)}")
+    # Set evaluator name for LLM
+    evaluator_name = f"LLM-{CONFIG.OPENROUTER_MODEL}"
 
-    # Create evaluation session
-    session = db_service.create_evaluation_session(evaluator_name)
-    print(f"Started evaluation session {session.id}")
+    # Use last 24 hours
+    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
 
-    # Evaluate predictions
-    evaluated_count = 0
-    skipped_count = 0
+    print(f"Evaluating predictions from the last 24 hours (since {yesterday})")
 
-    try:
-        for i, prediction in enumerate(predictions_to_evaluate, 1):
-            display_prediction(prediction, i, len(predictions_to_evaluate))
-
-            score = get_score()
-
-            if score is None:  # Quit requested
-                print("\nEvaluation interrupted by user.")
-                break
-            elif score == -1:  # Skip requested
-                print("Skipped.")
-                skipped_count += 1
-                continue
-
-            # Store evaluation
-            db_service.store_evaluation(
-                session_id=session.id,
-                prediction_id=prediction.id,
-                prediction_text=prediction.prediction,
-                score=score,
-            )
-            evaluated_count += 1
-            print(f"Scored: {score}")
-
-        # Complete session
-        db_service.complete_evaluation_session(session.id)
-
-        # Show summary
-        print(f"\n{'='*50}")
-        print("Evaluation Summary:")
-        print(f"Evaluated: {evaluated_count} predictions")
-        print(f"Skipped: {skipped_count} predictions")
-        print(f"Session ID: {session.id}")
-        print("Thank you for your evaluations!")
-
-    except KeyboardInterrupt:
-        print("\n\nEvaluation interrupted. Session saved.")
-        db_service.complete_evaluation_session(session.id)
-    except Exception as e:
-        print(f"\nError during evaluation: {e}")
-        print("Session will be marked as incomplete.")
+    # Use unified evaluation engine with LLM score provider
+    run_evaluation_with_provider(
+        LLMScoreProvider(),
+        evaluator_name,
+        yesterday,
+        CONFIG.EVALUATION_SAMPLE_SIZE,
+    )
 
 
 def show_stats() -> None:
@@ -274,6 +415,9 @@ def main() -> None:
         if sys.argv[1] == "stats":
             show_stats()
             return
+        elif sys.argv[1] == "llm":
+            run_llm_evaluation()
+            return
         elif sys.argv[1] == "from" and len(sys.argv) > 2:
             try:
                 from_date = datetime.fromisoformat(
@@ -284,6 +428,17 @@ def main() -> None:
             except ValueError:
                 print("Invalid date format. Please use YYYY-MM-DD")
                 return
+        elif sys.argv[1] == "help":
+            print("Usage:")
+            print("  python evaluator.py           - Manual evaluation")
+            print("  python evaluator.py llm       - LLM evaluation (last 24h)")
+            print(
+                "  python evaluator.py stats     - Show evaluation statistics"
+            )
+            print(
+                "  python evaluator.py from DATE - Manual evaluation from specific date (YYYY-MM-DD)"
+            )
+            return
 
     run_evaluation()
 

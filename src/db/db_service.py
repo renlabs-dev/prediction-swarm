@@ -1,8 +1,13 @@
 import random
 from collections import defaultdict
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple, TypedDict
 
+from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
+    Ss58Address,
+)
+
+from ..schemas import Prediction
 from .database import database
 from .models import (
     AddressPredictionCount,
@@ -10,7 +15,13 @@ from .models import (
     PredictionEvaluation,
     ProgramIteration,
 )
-from ..schemas import Prediction
+
+
+class FinderScores(TypedDict):
+    """Type definition for finder scores data structure."""
+
+    valid_scores: List[int]
+    invalid_count: int
 
 
 class DatabaseService:
@@ -151,6 +162,7 @@ class DatabaseService:
         session_id: int,
         prediction_id: int,
         prediction_text: str,
+        finder_key: Ss58Address,
         score: int,
     ) -> PredictionEvaluation:
         """Store a single prediction evaluation."""
@@ -159,6 +171,7 @@ class DatabaseService:
                 session_id=session_id,
                 prediction_id=prediction_id,
                 prediction_text=prediction_text,
+                finder_key=finder_key,
                 score=score,
                 evaluated_at=datetime.now(timezone.utc),
             )
@@ -257,6 +270,153 @@ class DatabaseService:
                 "completed_sessions": completed_sessions,
                 "average_score": int(round(avg_score, 1)),
             }
+
+    # Normalized scoring with penalties methods
+
+    def calculate_penalty(self, k: int, P: float, r: float) -> float:
+        """Calculate escalating penalty based on invalid count.
+
+        Args:
+            k: Number of invalid predictions (strike count)
+            P: Base penalty magnitude
+            r: Escalation factor
+
+        Returns:
+            Penalty value to subtract from normalized score
+        """
+        if r == 1.0:
+            return P * k
+        else:
+            return P * (r**k - 1) / (r - 1)
+
+    def get_last_session_scores(
+        self,
+    ) -> Optional[Tuple[int, Dict[Ss58Address, FinderScores]]]:
+        """Get scores from the last completed evaluation session grouped by finder_key.
+
+        Returns:
+            Tuple of (session_id, finder_scores_dict) where finder_scores_dict contains:
+            {
+                'finder_address': {
+                    'valid_scores': [score1, score2, ...],
+                    'invalid_count': count
+                }
+            }
+        """
+        with self.db.get_session() as session:
+            # Get the last completed session
+            last_session = (
+                session.query(EvaluationSession)
+                .filter(EvaluationSession.completed_at.is_not(None))
+                .order_by(EvaluationSession.completed_at.desc())
+                .first()
+            )
+
+            if not last_session:
+                return None
+
+            # Get all evaluations for that session
+            evaluations = (
+                session.query(PredictionEvaluation)
+                .filter(PredictionEvaluation.session_id == last_session.id)
+                .all()
+            )
+
+            # Group by finder_key
+            finder_scores: Dict[Ss58Address, FinderScores] = defaultdict(
+                lambda: {"valid_scores": [], "invalid_count": 0}
+            )
+
+            from ..config import CONFIG
+
+            for eval_record in evaluations:
+                finder_key = eval_record.finder_key
+                score = eval_record.score
+
+                if score == CONFIG.EVALUATION_INVALID_SCORE:
+                    finder_scores[finder_key]["invalid_count"] += 1
+                else:
+                    finder_scores[finder_key]["valid_scores"].append(score)
+
+            return last_session.id, dict(finder_scores)
+
+    def normalize_score(
+        self, score: float, min_score: int, max_score: int
+    ) -> float:
+        """Normalize a score to 0-1 range."""
+        return (score - min_score) / (max_score - min_score)
+
+    def calculate_normalized_scores_with_penalties(
+        self,
+    ) -> Optional[Dict[Ss58Address, Dict[str, float]]]:
+        """Calculate normalized scores with escalating invalid penalties for the last session.
+
+        Returns:
+            Dictionary mapping finder addresses to their scoring details:
+            {
+                'finder_address': {
+                    'base_score': float,     # Normalized average of valid scores (0-1)
+                    'invalid_count': int,    # Number of invalid predictions
+                    'penalty': float,        # Applied penalty
+                    'final_score': float     # Final score after penalty (0-1)
+                }
+            }
+        """
+        session_data = self.get_last_session_scores()
+        if not session_data:
+            return None
+
+        _, finder_scores = session_data
+
+        from ..config import CONFIG
+
+        result: Dict[Ss58Address, Dict[str, float]] = {}
+
+        for finder_key, data in finder_scores.items():
+            valid_scores = data["valid_scores"]
+            invalid_count = data["invalid_count"]
+
+            # Calculate base normalized score from valid scores
+            if valid_scores:
+                avg_score = sum(valid_scores) / len(valid_scores)
+                base_score = self.normalize_score(
+                    avg_score,
+                    CONFIG.EVALUATION_MIN_SCORE,
+                    CONFIG.EVALUATION_MAX_SCORE,
+                )
+            else:
+                base_score = 0.0  # No valid scores
+
+            # Calculate penalty for invalid predictions
+            penalty = (
+                self.calculate_penalty(
+                    invalid_count,
+                    CONFIG.PENALTY_BASE,
+                    CONFIG.PENALTY_ESCALATION,
+                )
+                if invalid_count > 0
+                else 0.0
+            )
+
+            # Apply penalty and bound final score
+            final_score = max(0.0, min(1.0, base_score - penalty))
+
+            result[finder_key] = {
+                "base_score": base_score,
+                "invalid_count": invalid_count,
+                "penalty": penalty,
+                "final_score": final_score,
+            }
+
+        # Normalize scores across all addresses so they sum to 1.0
+        total_final_score = sum(data["final_score"] for data in result.values())
+        
+        if total_final_score > 0:
+            for finder_key in result:
+                original_final_score = result[finder_key]["final_score"]
+                result[finder_key]["final_score"] = original_final_score / total_final_score
+        
+        return result
 
 
 # Global service instance

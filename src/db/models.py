@@ -3,6 +3,9 @@ from typing import List
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
+    Ss58Address,
+)
 
 
 class Base(DeclarativeBase):
@@ -95,38 +98,36 @@ class AddressPredictionCount(Base):
 
 class EvaluationSession(Base):
     """Tracks human evaluation sessions."""
-    
+
     __tablename__ = "evaluation_sessions"
-    
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     evaluator_name: Mapped[str] = mapped_column(
-        String,
-        nullable=False,
-        doc="Name of the person doing the evaluation"
+        String, nullable=False, doc="Name of the person doing the evaluation"
     )
     started_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
-        doc="When the evaluation session started"
+        doc="When the evaluation session started",
     )
     completed_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         nullable=True,
-        doc="When the evaluation session was completed"
+        doc="When the evaluation session was completed",
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
-        doc="When this record was created"
+        doc="When this record was created",
     )
-    
+
     # Relationship to evaluations
     evaluations: Mapped[List["PredictionEvaluation"]] = relationship(
         "PredictionEvaluation",
         back_populates="session",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
     )
-    
+
     def __repr__(self) -> str:
         return (
             f"<EvaluationSession(id={self.id}, "
@@ -138,48 +139,48 @@ class EvaluationSession(Base):
 
 class PredictionEvaluation(Base):
     """Stores human evaluations of predictions."""
-    
+
     __tablename__ = "prediction_evaluations"
-    
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     session_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("evaluation_sessions.id"),
         nullable=False,
-        doc="Reference to the evaluation session"
+        doc="Reference to the evaluation session",
     )
     prediction_id: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False,
-        doc="The prediction ID from the API"
+        Integer, nullable=False, doc="The prediction ID from the API"
     )
     prediction_text: Mapped[str] = mapped_column(
-        Text,
+        Text, nullable=False, doc="The actual prediction text being evaluated"
+    )
+    finder_key: Mapped[Ss58Address] = mapped_column(
+        String,
         nullable=False,
-        doc="The actual prediction text being evaluated"
+        doc="SS58 wallet address of the finder who submitted the prediction",
     )
     score: Mapped[int] = mapped_column(
         Integer,
         nullable=False,
-        doc="Human score from 0-100"
+        doc="Human score from 0-100, or -999 for invalid predictions",
     )
     evaluated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
-        doc="When this prediction was evaluated"
+        doc="When this prediction was evaluated",
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
-        doc="When this record was created"
+        doc="When this record was created",
     )
-    
+
     # Relationship back to session
     session: Mapped["EvaluationSession"] = relationship(
-        "EvaluationSession", 
-        back_populates="evaluations"
+        "EvaluationSession", back_populates="evaluations"
     )
-    
+
     def __repr__(self) -> str:
         return (
             f"<PredictionEvaluation(id={self.id}, "
