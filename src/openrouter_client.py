@@ -144,11 +144,9 @@ class OpenRouterClient:
             Integer score 0-100, CONFIG.EVALUATION_INVALID_SCORE for invalid, or None if extraction fails
         """
         try:
-            # Parse response directly as JSON
-            json_data = json.loads(response_text.strip())
-
-            # Parse with Pydantic model
-            response_model = LLMEvaluationResponse.model_validate(json_data)
+            response_model = LLMEvaluationResponse.model_validate(
+                response_text.strip()
+            )
 
             if response_model.score == "INVALID":
                 if response_model.reason:
@@ -176,10 +174,7 @@ class OpenRouterClient:
             LLMEvaluationResponse with score and reason, or None if parsing fails
         """
         try:
-            # Parse response directly as JSON
             json_data = json.loads(response_text.strip())
-
-            # Parse with Pydantic model
             return LLMEvaluationResponse.model_validate(json_data)
 
         except (json.JSONDecodeError, ValidationError, ValueError) as e:

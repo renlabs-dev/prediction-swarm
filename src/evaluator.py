@@ -208,6 +208,9 @@ class ManualScoreProvider:
 class LLMScoreProvider:
     """Score provider for LLM-based evaluation."""
 
+    def __init__(self) -> None:
+        self.last_reason: Optional[str] = None
+
     def get_score(
         self, prediction: Prediction, index: int, total: int
     ) -> Optional[int]:
@@ -215,13 +218,16 @@ class LLMScoreProvider:
         print(
             f"[{index}/{total}] Evaluating prediction {prediction.id} with LLM..."
         )
-        
+
         # Get full response with score and reason
         response = openrouter_client.evaluate_prediction_full(prediction)
-
         if response is None:
             print("  LLM evaluation failed - skipping")
+            self.last_reason = None
             return -1  # Skip this prediction
+
+        # Store the reason for later use
+        self.last_reason = response.reason
 
         if response.score == "INVALID":
             print("  LLM marked as INVALID")
@@ -318,13 +324,22 @@ def run_evaluation_with_provider(
                 else:
                     evaluated_count += 1
 
-                # Store evaluation
+                # Store evaluation with additional fields
+                full_text = getattr(prediction, "full_post", None)
+                score_reason = (
+                    getattr(score_provider, "last_reason", None)
+                    if hasattr(score_provider, "last_reason")
+                    else None
+                )
+
                 db_service.store_evaluation(
                     session_id=session.id,
                     prediction_id=prediction.id,
                     prediction_text=prediction.prediction,
                     finder_key=prediction.inserted_by_address,
                     score=score,
+                    full_text=full_text,
+                    score_reason=score_reason,
                 )
 
             # Complete session
@@ -380,7 +395,9 @@ def run_llm_evaluation() -> None:
 
     # Test OpenRouter connection first
     if not openrouter_client.test_connection():
-        print("Cannot proceed with LLM evaluation - OpenRouter connection failed.")
+        print(
+            "Cannot proceed with LLM evaluation - OpenRouter connection failed."
+        )
         return
 
     # Set evaluator name for LLM

@@ -80,7 +80,7 @@ class Config:
         # OpenRouter AI Evaluation settings
         self.OPENROUTER_API_KEY: Final[str] = os.getenv("OPENROUTER_URL", "")
         self.OPENROUTER_BASE_URL: Final[str] = "https://openrouter.ai/api/v1"
-        self.OPENROUTER_MODEL: Final[str] = "google/gemini-2.5-flash"
+        self.OPENROUTER_MODEL: Final[str] = "deepseek/deepseek-chat-v3.1"
 
         # AI Evaluation prompt
         self.AI_EVALUATION_SYSTEM_PROMPT: Final[
@@ -111,8 +111,11 @@ class Config:
             Return a json with the fields: 
                 {score: only an integer score between 0-100. or INVALID if the prediction is considered invalid}.
                 {reason: a string explaining why the prediction is invalid} // for when the score is INVALID
-            answer with nothing but the json response. Make no mistakes or i'll go to hell.
-                """
+            answer with nothing but the json response.
+            Dont forget: answer with just {score: int | INVALID, reason: str | None}.
+            Nothing else. Make no mistakes or ill go to hell.
+            Answer with nothing but the json response startin with '{' and ending with '}'.
+            """
 
     def get_initial_start_date(self) -> datetime:
         """Get the hardcoded initial start date for predictions."""

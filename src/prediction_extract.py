@@ -89,7 +89,10 @@ def get_final_scores(quantity_counts: Dict[str, int]) -> Dict[Ss58Address, int]:
     Returns:
         Dict mapping addresses to final scores (0-100 range)
     """
-    quality_scores = db_service.calculate_normalized_scores_with_penalties()
+    curated_finders = get_curated_permission_recipients()
+    quality_scores = db_service.calculate_normalized_scores_with_penalties(
+        curated_finders
+    )
 
     if not quality_scores:
         return {}
@@ -112,7 +115,10 @@ def display_latest_scores(quantity_counts: Dict[str, int]) -> None:
     Args:
         quantity_counts: Prediction counts by address from current iteration
     """
-    quality_scores = db_service.calculate_normalized_scores_with_penalties()
+    curated_finders = get_curated_permission_recipients()
+    quality_scores = db_service.calculate_normalized_scores_with_penalties(
+        curated_finders
+    )
 
     if not quality_scores:
         print(
@@ -212,6 +218,20 @@ def run_iteration() -> None:
     )
 
     print(f"Stored iteration {iteration.id} in database")
+
+    # Track finder status (active/inactive based on curated permissions)
+    print("Tracking finder status...")
+    curated_finders = get_curated_permission_recipients()
+    db_service.track_finder_status(
+        iteration_id=iteration.id,
+        active_finder_keys={
+            check_ss58_address(key) for key in current_totals.keys()
+        },
+        curated_permission_keys=curated_finders,
+    )
+    print(
+        f"Tracked {len(curated_finders)} curated finders, {len(current_totals)} active this iteration"
+    )
 
     # Calculate and display latest scores if evaluation sessions exist
     display_latest_scores(address_deltas)

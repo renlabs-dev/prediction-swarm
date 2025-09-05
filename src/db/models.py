@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
@@ -165,6 +165,16 @@ class PredictionEvaluation(Base):
         nullable=False,
         doc="Human score from 0-100, or -999 for invalid predictions",
     )
+    full_text: Mapped[Optional[str]] = mapped_column(
+        Text,
+        nullable=True,
+        doc="Full prediction text from API (full_post field)",
+    )
+    score_reason: Mapped[Optional[str]] = mapped_column(
+        Text,
+        nullable=True,
+        doc="Reason provided by LLM for the score",
+    )
     evaluated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
@@ -186,4 +196,100 @@ class PredictionEvaluation(Base):
             f"<PredictionEvaluation(id={self.id}, "
             f"prediction_id={self.prediction_id}, "
             f"score={self.score})>"
+        )
+
+
+class FinalScore(Base):
+    """Stores final calculated scores for each finder per evaluation session."""
+
+    __tablename__ = "final_scores"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    session_id: Mapped[int] = mapped_column(
+        Integer,
+        ForeignKey("evaluation_sessions.id"),
+        nullable=False,
+        doc="Reference to the evaluation session",
+    )
+    finder_key: Mapped[Ss58Address] = mapped_column(
+        String,
+        nullable=False,
+        doc="SS58 wallet address of the finder",
+    )
+    quality_score: Mapped[float] = mapped_column(
+        nullable=False,
+        doc="Quality score from evaluation (normalized across finders)",
+    )
+    final_score: Mapped[float] = mapped_column(
+        nullable=False,
+        doc="Final normalized score (share of total contribution)",
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        doc="When this record was created",
+    )
+
+    # Relationship back to session
+    session: Mapped["EvaluationSession"] = relationship("EvaluationSession")
+
+    def __repr__(self) -> str:
+        return (
+            f"<FinalScore(id={self.id}, "
+            f"finder={self.finder_key[:8]}..., "
+            f"final_score={self.final_score:.3f})>"
+        )
+
+
+class Finder(Base):
+    """Tracks all finders with curated permissions and their active status."""
+
+    __tablename__ = "finders"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    finder_key: Mapped[Ss58Address] = mapped_column(
+        String,
+        nullable=False,
+        unique=True,
+        doc="SS58 wallet address of the finder",
+    )
+    active: Mapped[bool] = mapped_column(
+        nullable=False,
+        default=True,
+        doc="Whether this finder is currently active (has permission and finds predictions)",
+    )
+    has_permission: Mapped[bool] = mapped_column(
+        nullable=False,
+        default=True,
+        doc="Whether this finder currently has curated permission",
+    )
+    last_active_iteration_id: Mapped[Optional[int]] = mapped_column(
+        Integer,
+        ForeignKey("program_iterations.id"),
+        nullable=True,
+        doc="Last iteration where this finder submitted predictions",
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        doc="When this finder was first discovered",
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        doc="When this record was last updated",
+    )
+
+    # Relationship to last active iteration
+    last_active_iteration: Mapped[Optional["ProgramIteration"]] = relationship(
+        "ProgramIteration"
+    )
+
+    def __repr__(self) -> str:
+        return (
+            f"<Finder(id={self.id}, "
+            f"finder={self.finder_key[:8]}..., "
+            f"active={self.active}, "
+            f"has_permission={self.has_permission})>"
         )

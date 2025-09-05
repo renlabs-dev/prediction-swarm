@@ -6,7 +6,7 @@ from alembic import context
 from sqlalchemy import pool
 
 # Add the src directory to the path so we can import models
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # Import our models
 from db.models import Base

@@ -12,6 +12,8 @@ from .database import database
 from .models import (
     AddressPredictionCount,
     EvaluationSession,
+    FinalScore,
+    Finder,
     PredictionEvaluation,
     ProgramIteration,
 )
@@ -164,6 +166,8 @@ class DatabaseService:
         prediction_text: str,
         finder_key: Ss58Address,
         score: int,
+        full_text: Optional[str] = None,
+        score_reason: Optional[str] = None,
     ) -> PredictionEvaluation:
         """Store a single prediction evaluation."""
         with self.db.get_session() as session:
@@ -173,6 +177,8 @@ class DatabaseService:
                 prediction_text=prediction_text,
                 finder_key=finder_key,
                 score=score,
+                full_text=full_text,
+                score_reason=score_reason,
                 evaluated_at=datetime.now(timezone.utc),
             )
             session.add(evaluation)
@@ -348,6 +354,7 @@ class DatabaseService:
 
     def calculate_normalized_scores_with_penalties(
         self,
+        curated_permission_keys: List[Ss58Address],
     ) -> Optional[Dict[Ss58Address, Dict[str, float]]]:
         """Calculate normalized scores with escalating invalid penalties for the last session.
 
@@ -408,6 +415,16 @@ class DatabaseService:
                 "final_score": final_score,
             }
 
+        # Add all curated permission keys, giving 0 scores to those not in results
+        for key in curated_permission_keys:
+            if key not in result:
+                result[key] = {
+                    "base_score": 0.0,
+                    "invalid_count": 0,
+                    "penalty": 0.0,
+                    "final_score": 0.0,
+                }
+
         # Normalize scores across all addresses so they sum to 1.0
         total_final_score = sum(data["final_score"] for data in result.values())
         
@@ -417,6 +434,87 @@ class DatabaseService:
                 result[finder_key]["final_score"] = original_final_score / total_final_score
         
         return result
+
+    def store_final_scores(
+        self,
+        session_id: int,
+        final_scores_data: Dict[Ss58Address, Dict[str, float]]
+    ) -> None:
+        """Store final calculated scores for an evaluation session.
+        
+        Args:
+            session_id: The evaluation session ID
+            final_scores_data: Dict with quality_score and final_score for each finder
+        """
+        with self.db.get_session() as session:
+            # Clear any existing final scores for this session
+            session.query(FinalScore).filter(
+                FinalScore.session_id == session_id
+            ).delete()
+            
+            # Store new final scores
+            for finder_key, data in final_scores_data.items():
+                final_score = FinalScore(
+                    session_id=session_id,
+                    finder_key=finder_key,
+                    quality_score=data["quality_score"],
+                    final_score=data["final_score"],
+                )
+                session.add(final_score)
+            
+            session.commit()
+
+    def track_finder_status(
+        self, 
+        iteration_id: int,
+        active_finder_keys: Set[Ss58Address],
+        curated_permission_keys: List[Ss58Address]
+    ) -> None:
+        """Track finder status based on current iteration activity and permissions.
+        
+        Args:
+            iteration_id: Current iteration ID
+            active_finder_keys: Set of finder keys who found predictions this iteration
+            curated_permission_keys: List of all keys with curated permissions
+        """
+        with self.db.get_session() as session:
+            # Convert to sets for easier operations
+            active_keys = set(active_finder_keys)
+            permission_keys = set(curated_permission_keys)
+            
+            # Get all existing finders
+            existing_finders = {
+                finder.finder_key: finder 
+                for finder in session.query(Finder).all()
+            }
+            
+            # Process all keys with current permissions
+            for key in permission_keys:
+                finder = existing_finders.get(key)
+                
+                if finder:
+                    # Update existing finder
+                    finder.has_permission = True
+                    finder.active = key in active_keys
+                    if key in active_keys:
+                        finder.last_active_iteration_id = iteration_id
+                else:
+                    # Create new finder
+                    finder = Finder(
+                        finder_key=key,
+                        has_permission=True,
+                        active=key in active_keys,
+                        last_active_iteration_id=iteration_id if key in active_keys else None
+                    )
+                    session.add(finder)
+            
+            # Process existing finders who lost permission
+            for key, finder in existing_finders.items():
+                if key not in permission_keys:
+                    finder.has_permission = False
+                    finder.active = False
+            
+            session.commit()
 
 
 # Global service instance
