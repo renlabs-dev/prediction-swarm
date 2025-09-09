@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Set, Tuple, TypedDict
 
+from torusdk.key import check_ss58_address
 from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
     Ss58Address,
 )
@@ -46,16 +47,7 @@ class DatabaseService:
         last_iteration = self.get_last_iteration()
         return last_iteration.run_timestamp if last_iteration else None
 
-    def count_predictions_by_address(
-        self, predictions: List[Prediction]
-    ) -> Dict[str, int]:
-        """Count predictions by wallet address."""
-        counts: Dict[str, int] = defaultdict(int)
-        for prediction in predictions:
-            counts[prediction.inserted_by_address] += 1
-        return dict(counts)
-
-    def get_previous_address_totals(self) -> Dict[str, int]:
+    def get_previous_address_totals(self) -> Dict[Ss58Address, int]:
         """Get the total prediction counts for each address from the last iteration."""
         last_iteration = self.get_last_iteration()
         if not last_iteration:
@@ -71,14 +63,17 @@ class DatabaseService:
             )
 
             return {
-                ac.wallet_address: ac.total_predictions for ac in address_counts
+                check_ss58_address(ac.wallet_address): ac.total_predictions
+                for ac in address_counts
             }
 
     def calculate_address_deltas(
-        self, current_totals: Dict[str, int], previous_totals: Dict[str, int]
-    ) -> Dict[str, int]:
+        self,
+        current_totals: Dict[Ss58Address, int],
+        previous_totals: Dict[Ss58Address, int],
+    ) -> Dict[Ss58Address, int]:
         """Calculate the difference in predictions since last run."""
-        deltas: Dict[str, int] = {}
+        deltas: Dict[Ss58Address, int] = {}
 
         for address, current_count in current_totals.items():
             previous_count = previous_totals.get(address, 0)
@@ -92,8 +87,8 @@ class DatabaseService:
         self,
         run_timestamp: datetime,
         predictions: List[Prediction],
-        address_deltas: Dict[str, int],
-        address_totals: Dict[str, int],
+        address_deltas: Dict[Ss58Address, int],
+        address_totals: Dict[Ss58Address, int],
     ) -> ProgramIteration:
         """Store a program iteration with all associated data."""
         with self.db.get_session() as session:
@@ -427,21 +422,23 @@ class DatabaseService:
 
         # Normalize scores across all addresses so they sum to 1.0
         total_final_score = sum(data["final_score"] for data in result.values())
-        
+
         if total_final_score > 0:
             for finder_key in result:
                 original_final_score = result[finder_key]["final_score"]
-                result[finder_key]["final_score"] = original_final_score / total_final_score
-        
+                result[finder_key]["final_score"] = (
+                    original_final_score / total_final_score
+                )
+
         return result
 
     def store_final_scores(
         self,
         session_id: int,
-        final_scores_data: Dict[Ss58Address, Dict[str, float]]
+        final_scores_data: Dict[Ss58Address, Dict[str, float]],
     ) -> None:
         """Store final calculated scores for an evaluation session.
-        
+
         Args:
             session_id: The evaluation session ID
             final_scores_data: Dict with quality_score and final_score for each finder
@@ -451,7 +448,7 @@ class DatabaseService:
             session.query(FinalScore).filter(
                 FinalScore.session_id == session_id
             ).delete()
-            
+
             # Store new final scores
             for finder_key, data in final_scores_data.items():
                 final_score = FinalScore(
@@ -461,17 +458,17 @@ class DatabaseService:
                     final_score=data["final_score"],
                 )
                 session.add(final_score)
-            
+
             session.commit()
 
     def track_finder_status(
-        self, 
+        self,
         iteration_id: int,
         active_finder_keys: Set[Ss58Address],
-        curated_permission_keys: List[Ss58Address]
+        curated_permission_keys: List[Ss58Address],
     ) -> None:
         """Track finder status based on current iteration activity and permissions.
-        
+
         Args:
             iteration_id: Current iteration ID
             active_finder_keys: Set of finder keys who found predictions this iteration
@@ -481,17 +478,17 @@ class DatabaseService:
             # Convert to sets for easier operations
             active_keys = set(active_finder_keys)
             permission_keys = set(curated_permission_keys)
-            
+
             # Get all existing finders
             existing_finders = {
-                finder.finder_key: finder 
+                finder.finder_key: finder
                 for finder in session.query(Finder).all()
             }
-            
+
             # Process all keys with current permissions
             for key in permission_keys:
                 finder = existing_finders.get(key)
-                
+
                 if finder:
                     # Update existing finder
                     finder.has_permission = True
@@ -504,16 +501,18 @@ class DatabaseService:
                         finder_key=key,
                         has_permission=True,
                         active=key in active_keys,
-                        last_active_iteration_id=iteration_id if key in active_keys else None
+                        last_active_iteration_id=iteration_id
+                        if key in active_keys
+                        else None,
                     )
                     session.add(finder)
-            
+
             # Process existing finders who lost permission
             for key, finder in existing_finders.items():
                 if key not in permission_keys:
                     finder.has_permission = False
                     finder.active = False
-            
+
             session.commit()
 
 

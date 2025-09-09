@@ -38,9 +38,21 @@ def get_predictions(from_date: datetime) -> List[Prediction]:
     return api_client.fetch_all_predictions(from_date)
 
 
+def count_predictions_by_address(
+    predictions: List[Prediction],
+) -> Dict[Ss58Address, int]:
+    """Count predictions by wallet address."""
+    from collections import defaultdict
+
+    counts: Dict[Ss58Address, int] = defaultdict(int)
+    for prediction in predictions:
+        counts[prediction.inserted_by_address] += 1
+    return dict(counts)
+
+
 def scale_scores_by_quantity(
     quality_scores: Dict[Ss58Address, Dict[str, float]],
-    quantity_counts: Dict[str, int],
+    quantity_counts: Dict[Ss58Address, int],
 ) -> Dict[Ss58Address, Dict[str, float]]:
     """Scale quality scores by prediction quantity and normalize across all finders.
 
@@ -80,7 +92,9 @@ def scale_scores_by_quantity(
     return result
 
 
-def get_final_scores(quantity_counts: Dict[str, int]) -> Dict[Ss58Address, int]:
+def get_final_scores(
+    quantity_counts: Dict[Ss58Address, int],
+) -> Dict[Ss58Address, int]:
     """Get final scores (quality × quantity) as integers 0-100.
 
     Args:
@@ -109,7 +123,7 @@ def get_final_scores(quantity_counts: Dict[str, int]) -> Dict[Ss58Address, int]:
     return final_scores
 
 
-def display_latest_scores(quantity_counts: Dict[str, int]) -> None:
+def display_latest_scores(quantity_counts: Dict[Ss58Address, int]) -> None:
     """Display the latest calculated scores for all finder addresses.
 
     Args:
@@ -190,7 +204,7 @@ def run_iteration() -> None:
     predictions = get_predictions(from_date)
 
     # Count predictions by address (total counts)
-    current_totals = db_service.count_predictions_by_address(predictions)
+    current_totals = count_predictions_by_address(predictions)
     print(f"Found predictions from {len(current_totals)} unique addresses")
 
     # Get previous totals and calculate deltas
