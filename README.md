@@ -3,11 +3,13 @@
 > First swarm formed through Torus abstractions, over the problem space of finding the internet's prophets.  
 The goal is simple but powerful: **predict who can predict the future.**
 
-Across social media and markets, thousands of predictions are made every day. Most fade into noise. The swarm turns this into structured memory:  
-- Find predictions made on a given topic  
+Across the internet, social media and traditional forms of media, vast amounts of predictions are made every day. Most fade into noise. The swarm turns this into structured memory:  
+- Find past predictions  
 - Verify them against real outcomes  
 - Track the reliability of each predictor across domains  
-- Surface who is worth listening to, and on what  
+- Surface who is worth listening to, in what context  
+
+The internet is full of proven prophets and with every event, with every news, their number and data on their reliability increases. on every news, someone has foreseen this outcome and publicly predicted it. some accounts do this consistently in topics of their speciality. they see the future clearly, where most see only fog. we can find them, and extract hard data to compute when to listen to which prophet.
 
 The first strong focus of the swarm is crypto. Imagine knowing the historical accuracy of any account’s calls on Bitcoin, Solana, or a niche token. Some people may be highly reliable in one area but consistently wrong in another. By quantifying this, the swarm gives hard data on where real signal exists in the flood of opinions.
 
