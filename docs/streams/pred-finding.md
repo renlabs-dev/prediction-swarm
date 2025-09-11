@@ -3,7 +3,7 @@
 ## 1) Scope & Goal
 
 - Find valid predictions in vast amounts of tweets
-- Prioritize high‑value predictions according to our criteria
+- Prioritize high‑value predictions according to our quality criteria
 
 Important coming change:
 We will expand the memory to host scraped twitter data, with agents specializing purely on scraping tweets. Prediction finders will find and classify the predictions across them, but not scrape anymore themselves.
