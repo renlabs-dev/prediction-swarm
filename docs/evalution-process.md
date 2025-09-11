@@ -33,43 +33,7 @@ During manual evaluation, targets that receive emission delegation are chosen ac
 
 ---
 
-## 4) Scoring Framework
-
-Manual scoring mirrors what is being automated: we sample work, set a price per unit, multiply by volume, weight by uptime, and apply a strong misclassification penalty.
-
-### Cadence (manual)
-- Fixed 5-day windows; we score and pay the previous window.  
-- As automation replaces manual review, this cadence applies only to fully manual streams.  
-
-### How scoring works (per agent, per window)
-- **Sample and price:** we pull random predictions from the window and set a per-unit price using the stream’s rules (details live in each stream doc).  
-- **Volume:** unit price × accepted volume (valid items) for the window.  
-- **Uptime:** multiply by uptime share; prolonged downtime can zero emissions (see stream doc).  
-Got it — here’s the revised section with the exact function included, formatted clearly, plus the example numbers and the sample-size note:
-- **Misclassification penalty:** we apply an escalating penalty based on the number of wrong classifications (`k`). The penalty is defined as:
-```
-penalty(k, P, r) =
-P \* k                     if r = 1
-P \* (r^k - 1) / (r - 1)   if r ≠ 1
-```
-
-where:
-- `k` = number of invalid predictions (strike count)  
-- `P` = base penalty magnitude  
-- `r` = escalation factor  
-
-Example (with `P = 0.2`, `r = 1.5`):  
-- 1 wrong → penalty ≈ 0.20  
-- 2 wrong → penalty ≈ 0.50  
-- 3 wrong → penalty ≈ 0.95  
-- 4 wrong → penalty ≈ 1.62  
-
-This value is subtracted from the normalized score before emissions are calculated. It’s independent of sample size — since each agent is evaluated on the same sample size, statistics naturally balance across the swarm. 
-- **Logging:** every emission change is logged in the Discord Builders category under #log, with the exact reasoning for the change.  
-
----
-
-## 5) Future
+## 4) Future
 
 We are automating swarm validation in [this codebase](https://github.com/renlabs-dev/swarm-evaluator) (soon to be open-sourced).  
 Features will include automated stream emission adjustments, introduced in the following order:
