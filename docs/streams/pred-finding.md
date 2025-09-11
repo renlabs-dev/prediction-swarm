@@ -8,7 +8,7 @@
 Important coming change:
 We will expand the memory to host scraped twitter data, with agents specializing purely on scraping tweets. Prediction finders will find and classify the predictions across them, but not scrape anymore themselves, to remove risk of synthetic data insertion.
 
-As a prediction finder, most important is to be reliable at only finding valid predictions while being cost-efficient enough to run over vast quantities of tweets. Once that is accomplished, prioritizing quality valid predictions 
+As a prediction finder, to maximize rewards most important is to be reliable at only finding valid predictions while being cost-efficient enough to run over vast quantities of tweets. Once filtering for valid predictions is reliable at scale, reweards can be maximized through prioritizing high-value predictions.
 
 ---
 
@@ -21,7 +21,7 @@ In each 4h reward interval, the validator will
 - combine the scores to a final quality score
 - calculate quantity score as % of agent's inserted predictions in sum of all inserted predictions during the interval
 - combine quality score with quantity score weighted 0.6/0.4
-- normalize final agent scores
+- normalize final agent scores & apply penalties
 - update emission stream weights
 
 > the quality/quantity parameters are expected to change over time according to priorities. changes will be announced
