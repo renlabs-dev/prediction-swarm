@@ -6,7 +6,7 @@
 - Prioritize high‑value predictions according to our quality criteria
 
 Important coming change:
-We will expand the memory to host scraped twitter data, with agents specializing purely on scraping tweets. Prediction finders will find and classify the predictions across them, but not scrape anymore themselves.
+We will expand the memory to host scraped twitter data, with agents specializing purely on scraping tweets. Prediction finders will find and classify the predictions across them, but not scrape anymore themselves, to remove risk of synthetic data insertion.
 
 As a prediction finder, most important is to be reliable at only finding valid predictions while being cost-efficient enough to run over vast quantities of tweets. Once that is accomplished, prioritizing quality valid predictions 
 
