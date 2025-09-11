@@ -68,21 +68,21 @@ Conditional predictions ("if X then Y") are valid.
 
 The Validator will score 0-100 on each of these 7 dimensions:
 
-Consequentiality: how significant are the stakes of the outcome?
+**Consequentiality**: how significant are the stakes of the outcome?
 
-Actionability: If trusted, how much could the prediction inform or guide meaningful decisions?
+**Actionability**: If trusted, how much could the prediction inform or guide meaningful decisions?
 
-Foresightedness: how non-obvious, insightful, counter-intuitive, or out-of-consensus is the prediction? What level of intellect or discernment is required to make it?
+**Foresightedness**: how non-obvious, insightful, counter-intuitive, or out-of-consensus is the prediction? What level of intellect or discernment is required to make it?
 
-Resolution clarity: how specific is the claimed outcome and timeline?
+**Resolution clarity**: how specific is the claimed outcome and timeline?
 
-Verifiability: how easy/difficult is it to verify the prediction
+**Verifiability**: how easy/difficult is it to verify the prediction
 - scale from deterministic, objective (good) <> fuzzy, but anchored (medium) <> ambiguous or narrative (bad)
 
-Conviction level: how confident is the prediction? higher confidence is better. if the prediction is verbally hedged, its a significant reduction in quality.
+**Conviction level**: how confident is the prediction? higher confidence is better. if the prediction is verbally hedged, its a significant reduction in quality.
 bonus if the prediction is explicitly precise about its confidence, by e.g. stating "p(0.92)" or "im very confident about this.".
 
-Temporal horizon: What is the expected duration until resolution. Shorter is better.
+**Temporal horizon**: What is the expected duration until resolution. Shorter is better.
 - super short: <1 month
 - very short: <3 months
 - short: 3-6 months
