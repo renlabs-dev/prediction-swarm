@@ -448,7 +448,6 @@ class DatabaseService:
             session.query(FinalScore).filter(
                 FinalScore.session_id == session_id
             ).delete()
-
             # Store new final scores
             for finder_key, data in final_scores_data.items():
                 final_score = FinalScore(
@@ -512,7 +511,6 @@ class DatabaseService:
                 if key not in permission_keys:
                     finder.has_permission = False
                     finder.active = False
-
             session.commit()
 
 
