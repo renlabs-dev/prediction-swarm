@@ -209,3 +209,4 @@ __marimo__/
 .direnv/*
 
 AGENTS.md
+*.csv

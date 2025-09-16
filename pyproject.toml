@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16.5",
+    "numpy>=2.3.3",
     "openai>=1.105.0",
+    "pandas>=2.0.0",
     "psycopg2-binary>=2.9.10",
     "pydantic>=2.11.7",
     "python-dotenv>=1.1.1",
@@ -16,10 +18,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
-    "mypy>=1.17.1",
-    "types-requests>=2.32.4.20250809",
-]
+dev = ["mypy>=1.17.1", "types-requests>=2.32.4.20250809"]
 
 [tool.ruff]
 line-length = 80

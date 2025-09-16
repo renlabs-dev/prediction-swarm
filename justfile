@@ -55,7 +55,7 @@ evaluate-stats:
 
 # Run type checking
 typecheck:
-    uv run mypy src/ db/
+    uv run mypy src/
 
 # Run linting
 lint:

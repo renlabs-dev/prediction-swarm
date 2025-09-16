@@ -3,6 +3,7 @@
 
 import sys
 from datetime import datetime, timedelta, timezone
+from time import sleep
 from typing import Dict, List, Optional, Protocol, Tuple
 
 from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
@@ -227,17 +228,26 @@ class LLMScoreProvider:
             return -1  # Skip this prediction
 
         # Store the reason for later use
-        self.last_reason = response.reason
+        self.last_reason = response.brief_rationale
 
-        if response.score == "INVALID":
+        if not response.valid:
             print("  LLM marked as INVALID")
-            if response.reason:
-                print(f"  Reason: {response.reason}")
+            if response.brief_rationale:
+                print(f"  Reason: {response.brief_rationale}")
             return CONFIG.EVALUATION_INVALID_SCORE
         else:
-            print(f"  LLM Score: {response.score}")
-            # Clamp score to valid range
-            return max(0, min(100, int(response.score)))
+            # Calculate weighted average of the 7 dimension scores
+            if response.scores:
+                weighted_score = 0.0
+                for dimension, score in response.scores.items():
+                    weight = CONFIG.SCORE_WEIGHTS.get(dimension, 0.0)
+                    weighted_score += score * weight
+                final_score = max(0, min(100, int(round(weighted_score))))
+                print(f"  LLM Score: {final_score} (weighted avg of {dict(response.scores)})")
+                return final_score
+            else:
+                print("  No scores provided for valid prediction")
+                return -1  # Skip this prediction
 
 
 def get_manual_score() -> Optional[int]:
@@ -389,32 +399,47 @@ def run_evaluation(from_date: Optional[datetime] = None) -> None:
 
 
 def run_llm_evaluation() -> None:
-    """Run LLM-based evaluation for predictions from the last day."""
+    """Run LLM-based evaluation in a loop every 30 minutes."""
     print("Welcome to the LLM Prediction Evaluator!")
     print("=" * 50)
+    print(f"Running every {CONFIG.LLM_EVALUATION_INTERVAL // 60} minutes...")
 
-    # Test OpenRouter connection first
-    if not openrouter_client.test_connection():
-        print(
-            "Cannot proceed with LLM evaluation - OpenRouter connection failed."
-        )
-        return
+    while True:
+        print(f"\n{'='*60}")
+        print(f"Starting LLM evaluation cycle at {datetime.now(timezone.utc)}")
+        print(f"{'='*60}")
 
-    # Set evaluator name for LLM
-    evaluator_name = f"LLM-{CONFIG.OPENROUTER_MODEL}"
+        # Test OpenRouter connection first
+        if not openrouter_client.test_connection():
+            print(
+                "Cannot proceed with LLM evaluation - OpenRouter connection failed."
+            )
+            print(f"Retrying in {CONFIG.LLM_EVALUATION_INTERVAL // 60} minutes...")
+        else:
+            # Set evaluator name for LLM
+            evaluator_name = f"LLM-{CONFIG.OPENROUTER_MODEL}"
 
-    # Use last 24 hours
-    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
+            # Use last 24 hours
+            yesterday = datetime.now(timezone.utc) - timedelta(days=2)
 
-    print(f"Evaluating predictions from the last 24 hours (since {yesterday})")
+            print(f"Evaluating predictions from the last 24 hours (since {yesterday})")
 
-    # Use unified evaluation engine with LLM score provider
-    run_evaluation_with_provider(
-        LLMScoreProvider(),
-        evaluator_name,
-        yesterday,
-        CONFIG.EVALUATION_SAMPLE_SIZE,
-    )
+            try:
+                # Use unified evaluation engine with LLM score provider
+                run_evaluation_with_provider(
+                    LLMScoreProvider(),
+                    evaluator_name,
+                    yesterday,
+                    CONFIG.EVALUATION_SAMPLE_SIZE,
+                )
+                print("LLM evaluation cycle completed successfully!")
+            except Exception as e:
+                print(f"Error during LLM evaluation: {e}")
+                print(f"Will retry in {CONFIG.LLM_EVALUATION_INTERVAL // 60} minutes...")
+
+        # Sleep for 30 minutes before next cycle
+        print(f"Sleeping for {CONFIG.LLM_EVALUATION_INTERVAL // 60} minutes...")
+        sleep(CONFIG.LLM_EVALUATION_INTERVAL)
 
 
 def show_stats() -> None:

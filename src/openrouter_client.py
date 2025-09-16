@@ -1,7 +1,7 @@
 """OpenRouter client for AI-powered prediction evaluation."""
 
 import json
-from typing import Literal, Optional, Union
+from typing import Dict, Optional
 
 from openai import OpenAI
 from pydantic import BaseModel, ValidationError
@@ -13,8 +13,9 @@ from .schemas import Prediction
 class LLMEvaluationResponse(BaseModel):
     """Pydantic model for LLM evaluation response."""
 
-    score: Union[int, Literal["INVALID"]]
-    reason: Optional[str] = None
+    valid: bool
+    scores: Optional[Dict[str, int]] = None
+    brief_rationale: str
 
 
 class OpenRouterClient:
@@ -144,18 +145,24 @@ class OpenRouterClient:
             Integer score 0-100, CONFIG.EVALUATION_INVALID_SCORE for invalid, or None if extraction fails
         """
         try:
-            response_model = LLMEvaluationResponse.model_validate(
-                response_text.strip()
-            )
+            json_data = json.loads(response_text.strip())
+            response_model = LLMEvaluationResponse.model_validate(json_data)
 
-            if response_model.score == "INVALID":
-                if response_model.reason:
-                    print(f"    Reason: {response_model.reason}")
+            if not response_model.valid:
+                if response_model.brief_rationale:
+                    print(f"    Reason: {response_model.brief_rationale}")
                 return CONFIG.EVALUATION_INVALID_SCORE
             else:
-                # Clamp numeric score to valid range
-                score = int(response_model.score)
-                return max(0, min(100, score))
+                # Calculate weighted average of the 7 dimension scores
+                if response_model.scores:
+                    weighted_score = 0.0
+                    for dimension, score in response_model.scores.items():
+                        weight = CONFIG.SCORE_WEIGHTS.get(dimension, 0.0)
+                        weighted_score += score * weight
+                    return max(0, min(100, int(round(weighted_score))))
+                else:
+                    print("    No scores provided for valid prediction")
+                    return None
 
         except (json.JSONDecodeError, ValidationError, ValueError) as e:
             print(f"    Failed to parse JSON response: {e}")
@@ -221,7 +228,6 @@ class OpenRouterClient:
                 max_tokens=10,
                 temperature=0.1,
             )
-
             if response.choices and response.choices[0].message.content:
                 content = response.choices[0].message.content.strip()
                 print(
