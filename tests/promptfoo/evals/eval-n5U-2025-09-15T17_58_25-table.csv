@@ -1,0 +1,4792 @@
+prediction,topic,kind,timestamp,author,[gpt-5 (best)] evaluator-system-prompt,[gemini-2.5-flash (fastest)] evaluator-system-prompt,[gemini-2.5-flash-lite (cheapest good)] evaluator-system-prompt,[deepseek-v3 (best price/perf)] evaluator-system-prompt,[claude-opus-4.1] evaluator-system-prompt,[grok-4] evaluator-system-prompt,[llama-4-maverick] evaluator-system-prompt,[deepseek-r1 (reasoning)] evaluator-system-prompt,[gpt-5-mini (budget openai)] evaluator-system-prompt
+The U.S. Federal Reserve will cut the target federal funds rate by at least 25 bps at its December 2025 meeting.,macro,valid,2025-09-15T08:00:00Z,@macrohawk,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 82,
+    ""foresightedness"": 56,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 97,
+    ""conviction"": 70,
+    ""temporal_horizon"": 90
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 90,
+   ""actionability"": 85,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 95,
+   ""conviction"": 80,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 90,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 85,
+   ""temporal_horizon"": 85
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 90
+  },
+  ""brief_rationale"": null
+}"
+"p(0.7): The S&P 500 will close below 4,200 on November 29, 2025 (UTC).",markets,valid,2025-09-10T12:00:00Z,@quantumtrader,[PASS] ,"[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 90,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 100,
+  ""conviction"": 90,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 75,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 85,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":75,""actionability"":85,""foresightedness"":65,""resolution_clarity"":95,""verifiability"":100,""conviction"":85,""temporal_horizon"":90},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":95,""conviction"":85,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 95,
+   ""conviction"": 85,
+   ""temporal_horizon"": 90
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 55,
+    ""actionability"": 60,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 90
+  },
+  ""brief_rationale"": null
+}"
+"Ethereum will trade above $6,000 on March 31, 2026 (UTC), using CoinDesk’s ETH closing price.",crypto,valid,2025-07-01T00:00:00Z,@chainseer,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 85,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 80,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 70,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":75,""actionability"":85,""foresightedness"":65,""resolution_clarity"":95,""verifiability"":100,""conviction"":80,""temporal_horizon"":65},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":90,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 65,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"Euro area headline inflation (HICP, YoY) reported by Eurostat for December 2025 will be between 1.8% and 2.4%.",macro,valid,2025-09-05T09:00:00Z,@euromacro,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 78,
+    ""actionability"": 66,
+    ""foresightedness"": 42,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 96,
+    ""conviction"": 70,
+    ""temporal_horizon"": 82
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":75,""actionability"":80,""foresightedness"":65,""resolution_clarity"":90,""verifiability"":95,""conviction"":75,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 60,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 65,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}"
+"Brent crude oil front-month will settle above $100/barrel on or before January 31, 2026 (ICE settlement).",energy,valid,2025-08-20T00:00:00Z,@barrelwatch,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 88,
+    ""actionability"": 78,
+    ""foresightedness"": 52,
+    ""resolution_clarity"": 92,
+    ""verifiability"": 96,
+    ""conviction"": 75,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 90,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 100,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 90,
+   ""actionability"": 80,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 90,
+   ""conviction"": 75,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":90,""actionability"":85,""foresightedness"":70,""resolution_clarity"":95,""verifiability"":100,""conviction"":80,""temporal_horizon"":80},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 90,
+   ""conviction"": 80,
+   ""temporal_horizon"": 80
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 65,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"Apple will release a foldable iPhone model available for purchase by December 31, 2026.",tech,valid,2025-06-30T00:00:00Z,@hardwareoracle,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"SpaceX Starship will complete an orbital mission and successfully recover the ship intact before July 1, 2026.",space,valid,2025-05-12T00:00:00Z,@launchlog,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 66,
+    ""foresightedness"": 58,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 60,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 65,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+The U.S. unemployment rate (BLS U-3) reported for March 2026 will be at least 5.2%.,macro,valid,2025-09-15T08:30:00Z,@laborlens,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 78,
+    ""actionability"": 66,
+    ""foresightedness"": 57,
+    ""resolution_clarity"": 93,
+    ""verifiability"": 96,
+    ""conviction"": 75,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 85,
+  ""actionability"": 70,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 65,
+  ""resolution_clarity"": 80,
+  ""verifiability"": 90,
+  ""conviction"": 70,
+  ""temporal_horizon"": 75
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 75,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 65,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}"
+"By June 30, 2026, at least one major U.S. automaker will announce a full shutdown of an EV assembly line for 3+ months.",autos,valid,2025-09-01T00:00:00Z,@supplychainnerd,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 72,
+    ""actionability"": 60,
+    ""foresightedness"": 52,
+    ""resolution_clarity"": 68,
+    ""verifiability"": 70,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 75,
+    ""temporal_horizon"": 55
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 75,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"p(0.8): A Cat-3 or stronger hurricane will make U.S. landfall by October 31, 2025 (NHC classification).",weather,valid,2025-08-01T00:00:00Z,@stormsignal,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 60,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 85,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 90,
+  ""actionability"": 70,
+  ""foresightedness"": 40,
+  ""resolution_clarity"": 85,
+  ""verifiability"": 95,
+  ""conviction"": 80,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 80,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 85,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 85,
+    ""temporal_horizon"": 90
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":90,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":85,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 90,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 70,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 90,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}"
+Microsoft will report FY2026 revenue exceeding $300B in its audited 10-K.,equities,valid,2025-09-15T10:00:00Z,@earningscall,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 68,
+    ""actionability"": 60,
+    ""foresightedness"": 46,
+    ""resolution_clarity"": 94,
+    ""verifiability"": 96,
+    ""conviction"": 70,
+    ""temporal_horizon"": 66
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 80,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 100,
+   ""conviction"": 85,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"""Dune: Part Three"" will gross over $1B worldwide within 90 days of release (Box Office Mojo).",entertainment,valid,2025-09-15T11:00:00Z,@cinecast,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 50,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 96,
+    ""verifiability"": 96,
+    ""conviction"": 70,
+    ""temporal_horizon"": 30
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 40,
+  ""actionability"": 30,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 80
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 50,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 80,
+   ""temporal_horizon"": 20
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 35,
+    ""actionability"": 40,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 25
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":40,""foresightedness"":20,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":80},""brief_rationale"":null}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 55,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 85
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 45,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 85
+  },
+  ""brief_rationale"": null
+}"
+"The ECB will end balance sheet reinvestments on all remaining APP/PEPP facilities by June 30, 2026.",policy,valid,2025-07-15T00:00:00Z,@centralbankwatch,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 72,
+    ""foresightedness"": 56,
+    ""resolution_clarity"": 88,
+    ""verifiability"": 92,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 80,
+   ""conviction"": 75,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 80,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+India's real GDP growth for FY2025-26 will be reported at 6.0% or lower by the MOSPI first advance estimates.,macro,valid,2025-09-02T00:00:00Z,@emergingalpha,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 75,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 65
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 85,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 75,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 65,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 80
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"A spot Solana ETF will be approved for listing on a major U.S. exchange by December 31, 2026.",crypto,valid,2025-09-15T07:00:00Z,@etfwatcher,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 78,
+    ""actionability"": 64,
+    ""foresightedness"": 57,
+    ""resolution_clarity"": 83,
+    ""verifiability"": 92,
+    ""conviction"": 70,
+    ""temporal_horizon"": 46
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 75,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 80,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 65,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 55
+  },
+  ""brief_rationale"": null
+}"
+"The average 30-year fixed U.S. mortgage rate (Freddie Mac) will fall below 5.0% at least once before March 31, 2026.",housing,valid,2025-09-03T00:00:00Z,@ratewatch,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 66,
+    ""resolution_clarity"": 92,
+    ""verifiability"": 93,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 90,
+  ""actionability"": 85,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 100,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 75,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 85,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 85,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":90,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 80,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 75,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"An mRNA-based therapeutic (non-vaccine) will receive first FDA approval by December 31, 2026.",biotech,valid,2025-04-20T00:00:00Z,@pipelinespy,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 78,
+    ""actionability"": 58,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 82,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 90,
+  ""actionability"": 70,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 100,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":80,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"Bitcoin’s 30-day realized volatility (CoinDesk index) will exceed 120% at least once before May 31, 2026.",crypto,valid,2025-09-12T00:00:00Z,@volsurfer,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 58,
+    ""actionability"": 40,
+    ""foresightedness"": 53,
+    ""resolution_clarity"": 86,
+    ""verifiability"": 88,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 80,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 50,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 75,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":70,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 75,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 55,
+    ""actionability"": 65,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"By June 30, 2026, at least one EU member state will implement a nationwide ban on selling new ICE-only passenger cars effective by 2030.",policy,valid,2025-07-11T00:00:00Z,@greengrid,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 58,
+    ""foresightedness"": 48,
+    ""resolution_clarity"": 76,
+    ""verifiability"": 72,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 65,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 75,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 80,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 75,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"""Grand Theft Auto VI"" will sell over 30 million copies in its first 60 days (publisher-reported units).",gaming,valid,2025-09-06T00:00:00Z,@playmetrics,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 75,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 70,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 85,
+  ""conviction"": 70,
+  ""temporal_horizon"": 90
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 20
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 85
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 85
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":80},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 95,
+   ""conviction"": 90,
+   ""temporal_horizon"": 85
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}"
+Germany will enter a technical recession (two consecutive negative QoQ real GDP) by Q1 2026 (Destatis).,macro,valid,2025-08-10T00:00:00Z,@eurozonewatch,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 78,
+    ""actionability"": 65,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 82,
+    ""verifiability"": 86,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 65,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+Netflix will report at least 350 million global paid memberships by Q4 2026 earnings.,equities,valid,2025-09-15T09:45:00Z,@streamstalker,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 70,
+    ""foresightedness"": 58,
+    ""resolution_clarity"": 88,
+    ""verifiability"": 94,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 75,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 65,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 80,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"If the Bank of Japan exits negative rates by March 2026, USDJPY will trade below 130 within 30 days of that decision.",fx,valid,2025-09-14T18:00:00Z,@carryonfx,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 92,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 80,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 70,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 85,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":60,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 80,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 75,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 70,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}"
+The average global temperature anomaly (Copernicus ERA5 monthly) for 2026 will set a new record high versus 2023.,climate,valid,2025-09-01T00:00:00Z,@climatedata,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 40,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 88,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 90,
+  ""actionability"": 60,
+  ""foresightedness"": 50,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 70,
+    ""foresightedness"": 75,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 90,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 70,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":80,""verifiability"":90,""conviction"":70,""temporal_horizon"":20},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 60,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 50,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"The EU AI Act will be fully enacted with binding general-purpose AI obligations by December 31, 2026.",policy,valid,2025-05-15T00:00:00Z,@reglex,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 60,
+    ""foresightedness"": 30,
+    ""resolution_clarity"": 70,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 55
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 85,
+  ""verifiability"": 90,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 75,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":90,""foresightedness"":60,""resolution_clarity"":80,""verifiability"":90,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 75,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"U.S. new housing starts (SAAR) will print below 1.1M units at least once before February 28, 2026 (Census).",housing,valid,2025-09-08T00:00:00Z,@buildbeats,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 72,
+    ""foresightedness"": 58,
+    ""resolution_clarity"": 86,
+    ""verifiability"": 88,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 50,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":75,""actionability"":80,""foresightedness"":70,""resolution_clarity"":95,""verifiability"":100,""conviction"":70,""temporal_horizon"":85},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 40,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 75,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}"
+"OpenAI will release a model that scores ≥90% on MMLU by June 30, 2026.",ai,valid,2025-07-07T00:00:00Z,@benchmarksleuth,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 55,
+    ""actionability"": 40,
+    ""foresightedness"": 30,
+    ""resolution_clarity"": 75,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 90,
+  ""actionability"": 70,
+  ""foresightedness"": 80,
+  ""resolution_clarity"": 95,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 95,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}"
+Saudi Aramco will announce an upstream capacity expansion project delay of ≥12 months by year-end 2026.,energy,valid,2025-09-13T00:00:00Z,@oilandalpha,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 55,
+    ""verifiability"": 65,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 85,
+  ""verifiability"": 90,
+  ""conviction"": 70,
+  ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":80,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 65,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"By September 30, 2026, at least one U.S. state will implement a statewide ban on TikTok on government devices.",policy,valid,2025-03-22T00:00:00Z,@statestack,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is already true as of 2023: many U.S. states implemented bans on TikTok on state/government devices. Thus the outcome was not uncertain at the time of posting (2025-03-22) and is effectively already resolved, failing the validity gate.""
+}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 60,
+  ""actionability"": 50,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 50,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 60,
+   ""actionability"": 50,
+   ""foresightedness"": 40,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 45,
+    ""actionability"": 55,
+    ""foresightedness"": 25,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction does not claim a future outcome that is uncertain, non-trivial, and non-obvious. As of the posted date in 2025, multiple U.S. states had already implemented bans on TikTok on government devices years prior, making this a statement about an existing state rather than a future prediction.""
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 60,
+   ""actionability"": 50,
+   ""foresightedness"": 40,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 30
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 40,
+    ""actionability"": 50,
+    ""foresightedness"": 15,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+The men’s winner of Wimbledon 2026 will not be ranked in the ATP top 3 entering the tournament.,sports,valid,2025-08-05T00:00:00Z,@grasscourtcall,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 35,
+    ""actionability"": 50,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 98,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"": true, ""scores"": {""consequentiality"": 30, ""actionability"": 10, ""foresightedness"": 70, ""resolution_clarity"": 80, ""verifiability"": 90, ""conviction"": 70, ""temporal_horizon"": 40}, ""brief_rationale"": null}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 40,
+    ""actionability"": 30,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 60,
+   ""actionability"": 40,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 25,
+    ""actionability"": 35,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 70,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":40,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":90,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 95,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 45,
+    ""actionability"": 45,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}"
+"""The Legend of Zelda"" next mainline release will win Game of the Year at The Game Awards the year it releases.",gaming,valid,2025-09-11T00:00:00Z,@gotywhisperer,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 35,
+    ""actionability"": 30,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 70,
+    ""verifiability"": 75,
+    ""conviction"": 70,
+    ""temporal_horizon"": 20
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"": true, ""scores"": {""consequentiality"": 40, ""actionability"": 10, ""foresightedness"": 60, ""resolution_clarity"": 70, ""verifiability"": 90, ""conviction"": 70, ""temporal_horizon"": 40}, ""brief_rationale"": null}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 50,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 60,
+   ""actionability"": 30,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 25,
+    ""actionability"": 20,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 75,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 30
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 45,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":60,""actionability"":30,""foresightedness"":40,""resolution_clarity"":80,""verifiability"":90,""conviction"":70,""temporal_horizon"":50},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 40,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 90
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 35,
+    ""foresightedness"": 45,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 40
+  },
+  ""brief_rationale"": null
+}"
+"Eurozone unemployment will rise by at least 0.7 pp from August 2025 to any monthly print before May 31, 2026.",macro,valid,2025-09-15T07:30:00Z,@eulaborlight,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 72,
+    ""actionability"": 58,
+    ""foresightedness"": 44,
+    ""resolution_clarity"": 78,
+    ""verifiability"": 76,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 65
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 50
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 75,
+   ""actionability"": 60,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":70,""actionability"":80,""foresightedness"":75,""resolution_clarity"":90,""verifiability"":95,""conviction"":80,""temporal_horizon"":70},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 75,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"A U.S. federal court will enjoin enforcement of at least one major state-level social media age-verification law by June 30, 2026.",law,valid,2025-06-01T00:00:00Z,@docketdive,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The outcome was already true before the posting date (e.g., a federal court enjoined Arkansas's Social Media Safety Act in 2023), so it lacks uncertainty and is a trivial prediction.""
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 70,
+  ""resolution_clarity"": 80,
+  ""verifiability"": 90,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 75,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 80
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 65,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":90,""foresightedness"":60,""resolution_clarity"":85,""verifiability"":90,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 65,
+    ""verifiability"": 80,
+    ""conviction"": 80,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"NVIDIA will report a quarterly gross margin below 70% at least once before December 31, 2026.",equities,valid,2025-09-15T09:15:00Z,@chipcheck,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 65,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 82,
+    ""verifiability"": 93,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 70,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 80,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 75,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":90,""conviction"":70,""temporal_horizon"":40},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 65,
+   ""foresightedness"": 75,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 90,
+   ""conviction"": 80,
+   ""temporal_horizon"": 40
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 55,
+    ""foresightedness"": 35,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+An OECD country will adopt a four-day workweek policy (no pay cut) across its national civil service by end-2026.,labor,valid,2025-02-14T00:00:00Z,@futureofwork,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 58,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 78,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 70,
+  ""actionability"": 60,
+  ""foresightedness"": 75,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 85,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 75,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 70,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 90,
+    ""conviction"": 75,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 85,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 50,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}"
+"By March 31, 2026, at least one Big Tech firm will publicly commit to >$50B capex for AI infrastructure for the calendar year.",ai,valid,2025-09-09T00:00:00Z,@datacenterops,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 70,
+    ""foresightedness"": 55,
+    ""resolution_clarity"": 62,
+    ""verifiability"": 60,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 70,
+    ""foresightedness"": 75,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 70,
+    ""foresightedness"": 75,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 85,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 80,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 75,
+    ""foresightedness"": 65,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 80,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":70,""resolution_clarity"":90,""verifiability"":85,""conviction"":80,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 60,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 75,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 85,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 75,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}"
+"Global container shipping spot rates (Drewry WCI composite) will fall below $2,000/FEU at least once before July 31, 2026.",logistics,valid,2025-08-28T00:00:00Z,@freightflow,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 62,
+    ""actionability"": 56,
+    ""foresightedness"": 47,
+    ""resolution_clarity"": 93,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+  ""consequentiality"": 80,
+  ""actionability"": 75,
+  ""foresightedness"": 60,
+  ""resolution_clarity"": 90,
+  ""verifiability"": 95,
+  ""conviction"": 70,
+  ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 75,
+    ""actionability"": 85,
+    ""foresightedness"": 60,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 80,
+    ""actionability"": 75,
+    ""foresightedness"": 70,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 80,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":70,""foresightedness"":60,""resolution_clarity"":90,""verifiability"":85,""conviction"":70,""temporal_horizon"":60},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 70,
+   ""foresightedness"": 65,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 85,
+   ""conviction"": 70,
+   ""temporal_horizon"": 50
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 60,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 65
+  },
+  ""brief_rationale"": null
+}"
+The 2026 FIFA World Cup winner will come from CONMEBOL.,sports,valid,2025-09-04T00:00:00Z,@footyforecaster,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 40,
+    ""actionability"": 55,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 72
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"": true, ""scores"": {""consequentiality"": 60, ""actionability"": 20, ""foresightedness"": 50, ""resolution_clarity"": 70, ""verifiability"": 90, ""conviction"": 70, ""temporal_horizon"": 60}, ""brief_rationale"": null}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 40,
+    ""foresightedness"": 50,
+    ""resolution_clarity"": 70,
+    ""verifiability"": 80,
+    ""conviction"": 70,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 40,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 80,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 45,
+    ""actionability"": 55,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 85,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 50,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 100,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":90,""verifiability"":95,""conviction"":70,""temporal_horizon"":30},""brief_rationale"":null}","[PASS] ```json
+{
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 80,
+   ""actionability"": 65,
+   ""foresightedness"": 50,
+   ""resolution_clarity"": 70,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}
+```","[PASS] {""valid"": true, ""scores"": {""consequentiality"": 40, ""actionability"": 40, ""foresightedness"": 30, ""resolution_clarity"": 90, ""verifiability"": 95, ""conviction"": 70, ""temporal_horizon"": 70}, ""brief_rationale"": null}"
+"I will lose 50 pounds by October 14, 2025.",health,trivial-self-controlled,2025-09-10T00:00:00Z,@me,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 20,
+    ""foresightedness"": 5,
+    ""resolution_clarity"": 90,
+    ""verifiability"": 70,
+    ""conviction"": 70,
+    ""temporal_horizon"": 85
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is not consequential to someone who can't control it, as the predictor directly controls their own weight loss.""
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 60,
+    ""actionability"": 70,
+    ""foresightedness"": 20,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 70,
+   ""actionability"": 80,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 90,
+   ""verifiability"": 90,
+   ""conviction"": 70,
+   ""temporal_horizon"": 70
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 25,
+    ""actionability"": 20,
+    ""foresightedness"": 10,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 85
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is about an outcome directly controlled by the predictor themselves, so it lacks consequentiality for entities who cannot control it.""}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":90,""foresightedness"":20,""resolution_clarity"":90,""verifiability"":90,""conviction"":70,""temporal_horizon"":80},""brief_rationale"":null}",[PASS] ,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 70,
+    ""actionability"": 40,
+    ""foresightedness"": 20,
+    ""resolution_clarity"": 95,
+    ""verifiability"": 95,
+    ""conviction"": 70,
+    ""temporal_horizon"": 90
+  },
+  ""brief_rationale"": null
+}"
+The sun will rise tomorrow.,science,trivial,2025-09-15T06:00:00Z,@obviousfacts,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Invalid under the gate: while it’s a future claim and verifiable, it’s trivial and near-certain, failing the ‘non-trivial and non-obvious’ uncertainty requirement.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain; it is a trivial and obvious event. Therefore, it fails the 'Outcome is uncertain' validity gate.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The outcome is not uncertain; it is a near-certain event based on established scientific understanding. Therefore, it fails the 'Outcome is uncertain' validity criterion.""
+}
+```","[PASS] ```json
+{
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is trivial and obvious, lacking uncertainty.""
+}
+```","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The outcome is not uncertain - the sun rising tomorrow is a trivial, obvious certainty based on Earth's rotation. This is a deterministic astronomical event, not a meaningful prediction.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is trivial and obvious, as the sun rising tomorrow is a certain astronomical event with no real uncertainty.""}","[PASS] {""valid"": false, ""scores"": {""consequentiality"": null, ""actionability"": null, ""foresightedness"": null, ""resolution_clarity"": null, ""verifiability"": null, ""conviction"": null, ""temporal_horizon"": null}, ""brief_rationale"": ""The prediction is too obvious and certain, lacking uncertainty.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Prediction fails validity: outcome is trivial/obvious (sunrise is a predictable daily astronomical event with near-certainty).""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Invalid because although it asserts a future, verifiable outcome, the claim is trivial and virtually certain (not non‑obvious or uncertain). It therefore fails the uncertainty/non‑triviality requirement of the validity gate.""
+}"
+I will drink a glass of water today.,lifestyle,trivial,2025-09-15T08:10:00Z,@hydratedhuman,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is trivial, fully under the predictor’s control, and carries no meaningful consequence for those who can’t control it. It also lacks public verifiability. Fails the validity gate.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain; it is a trivial and obvious daily activity for most people. It also lacks consequentiality for anyone other than the predictor.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The outcome is not uncertain or non-obvious, making it trivial. While verifiable and consequential to the individual, it lacks the necessary uncertainty for validity.""
+}
+```","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is trivial and lacks consequentiality, as drinking water is a routine and controllable action with minimal impact on others.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Fails consequentiality test - drinking water is a routine personal action with no meaningful impact on others who cannot control it. The outcome is entirely within the predictor's control and lacks consequence for external parties.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is trivial and obvious, lacking uncertainty. It is fully controlled by the predictor and has no practical impact on others who cannot control it.""}","[PASS] {""valid"": false, ""scores"": {""consequentiality"": null, ""actionability"": null, ""foresightedness"": null, ""resolution_clarity"": null, ""verifiability"": null, ""conviction"": null, ""temporal_horizon"": null}, ""brief_rationale"": ""The prediction is too trivial and certain to be considered valid.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Outcome is trivial/obvious (lacks uncertainty) and inconsequential to others.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Although this is a future claim, it lacks non-trivial consequences for people or entities who don't control it (no practical impact beyond the speaker). Because the outcome carries negligible external stakes, it fails the 'consequential to others' validity gate.""
+}"
+Either Bitcoin will go up or it will go down this week.,crypto,tautology,2025-09-15T00:01:00Z,@captainobvious,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a tautology that covers all outcomes and asserts no specific uncertain future state. It’s trivial, always true, and provides no testable or actionable claim beyond inevitability, so it fails the uncertainty/non-triviality requirement of the validity gate.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain; it is a tautology that Bitcoin will either go up or down. This prediction is trivial and obvious.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is not verifiable in principle as it states a tautology (Bitcoin must either go up or down). It lacks specificity and foresight, offering no non-obvious insight into future market movements.""
+}
+```","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is trivial and obvious, as it covers all possible outcomes without providing meaningful insight or specificity.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is tautological - Bitcoin must either go up, down, or stay exactly the same. By claiming it will go up OR down, the prediction covers nearly all possible outcomes except the unlikely case of zero price movement, making it trivial and essentially certain rather than uncertain.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is trivial and obvious, asserting an almost certain outcome (Bitcoin price will change in some direction) without providing any specific insight or uncertainty, failing the non-trivial and non-obvious criterion.""}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is trivial and obvious, as it covers all possible outcomes.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Invalid: Prediction is a tautology (covers all possible outcomes without specificity). Outcome is trivial/obvious since Bitcoin must either rise or fall, violating 'uncertainty' validity requirement.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The claim is trivial/tautological and provides no non-obvious, informative forecast: over a week an asset will almost certainly be observed higher or lower, so it fails the 'outcome is uncertain/non-trivial' validity gate and offers no meaningful, consequential prediction.""
+}"
+The 2020 U.S. presidential election will be held in November 2020.,politics,past-event,2025-09-15T00:00:00Z,@timetraveler,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The statement was posted in 2025 about an event in 2020, so it is not a future outcome at the time of posting. It’s already settled and trivial, failing the validity gate.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction claims a past outcome, not a future one. The 2020 U.S. presidential election has already occurred.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction claims a past event, not a future outcome. The election has already occurred, making it not a prediction of a future state.""
+}
+```","[PASS] ```json
+{
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is about a past event and thus not a future outcome.""
+}
+```","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is not a valid prediction because it was posted in September 2025 about an event that already occurred in November 2020. The outcome is not uncertain - it is a historical fact that has already been resolved.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction claims an outcome in 2020, but was posted in 2025, making it a statement about the past rather than a future outcome. The outcome is not uncertain, as it is already known and verifiable as having occurred.""}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":20,""foresightedness"":10,""resolution_clarity"":100,""verifiability"":100,""conviction"":90,""temporal_horizon"":null},""brief_rationale"":null}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Prediction posted in 2025 about a 2020 event fails uncertainty: outcome was already known.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""Invalid: the statement refers to the November 2020 election, which occurred before the post date (2025-09-15). It is not a claim about a future, uncertain outcome and therefore fails the validity gate requiring a future-verifiable prediction.""}"
+Humanity should eliminate poverty by 2030.,policy,normative,2025-09-15T00:00:00Z,@idealist,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a normative statement (“should eliminate poverty by 2030”), not a forecast. It does not assert that a future outcome will occur, so it’s not a verifiable prediction.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""This is a goal or a call to action, not a prediction of a future outcome. It states what humanity 'should' do, not what 'will' happen.""
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 90,
+    ""actionability"": 70,
+    ""foresightedness"": 40,
+    ""resolution_clarity"": 60,
+    ""verifiability"": 50,
+    ""conviction"": 50,
+    ""temporal_horizon"": 70
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 100,
+   ""actionability"": 80,
+   ""foresightedness"": 70,
+   ""resolution_clarity"": 60,
+   ""verifiability"": 70,
+   ""conviction"": 60,
+   ""temporal_horizon"": 60
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a normative statement expressing what 'should' happen, not a prediction claiming what 'will' happen. It advocates for a goal rather than asserting a future outcome.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""This is a normative statement expressing what should happen, not a prediction asserting what will occur in the future.""}","[PASS] {""valid"":true,""scores"":{""consequentiality"":90,""actionability"":80,""foresightedness"":20,""resolution_clarity"":40,""verifiability"":60,""conviction"":70,""temporal_horizon"":50},""brief_rationale"":null}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 95,
+   ""actionability"": 60,
+   ""foresightedness"": 30,
+   ""resolution_clarity"": 70,
+   ""verifiability"": 50,
+   ""conviction"": 50,
+   ""temporal_horizon"": 30
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Statement is a normative recommendation ('should eliminate'), not a factual prediction that asserts what will occur. It expresses an aspiration/goal rather than a verifiable future outcome; additionally key terms ('poverty', 'humanity') are undefined, making verification ambiguous.""
+}"
+"By next week, I will text my friend back.",lifestyle,self-controlled,2025-09-15T00:00:00Z,@texter,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Trivial self-action under the predictor’s direct control, offering minimal uncertainty and limited consequence for others; also weak external verifiability. Fails the non-trivial/non-obvious criterion of the validity gate.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain; it is a trivial and obvious personal action. It is also controlled by the predictor, violating the 'consequential to some who can't control it' criterion.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The outcome is not uncertain; it is a personal action that the predictor has full control over. Therefore, it does not meet the 'outcome is uncertain' criterion for validity.""
+}
+```","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is trivial and lacks consequentiality for those who cannot control it.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Fails consequentiality requirement - the outcome is not consequential to people who can't control it. This is a personal commitment about the predictor's own controllable action, not a prediction about an uncertain external outcome that affects others.""
+}",[PASS] ,"[PASS] {""valid"": false, ""scores"": {""consequentiality"": null, ""actionability"": null, ""foresightedness"": null, ""resolution_clarity"": null, ""verifiability"": null, ""conviction"": null, ""temporal_horizon"": null}, ""brief_rationale"": ""The prediction is about the predictor's own action, not consequential to others who can't control it.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Outcome is trivial and directly controlled by the predictor; lacks uncertainty and consequential impact on others.""
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 10,
+    ""actionability"": 15,
+    ""foresightedness"": 10,
+    ""resolution_clarity"": 75,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 100
+  },
+  ""brief_rationale"": null
+}"
+Aliens will think jazz is better than rock.,speculation,unverifiable,2025-09-15T00:00:00Z,@ufohottake,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Not verifiable or resolvable: undefined subject (“aliens” as a whole), no timeline, and no clear criterion for judging group-wide preference. Even if contact occurs, one cannot practically assess all aliens; absent contact it’s untestable. Stakes and actionability are negligible.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not verifiable in principle, as we cannot know what aliens will think. It also lacks consequentiality for humans.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is not verifiable in principle, as there is no established method to determine the musical preferences of extraterrestrial beings or to verify such a claim.""
+}
+```","[PASS] ```json
+{
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Outcome is not verifiable in principle; no reasonable way to confirm alien preferences.""
+}
+```","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""While this claims a future outcome about alien preferences, it fails verifiability in principle. There is no reasonable way an observer could examine future evidence to judge whether aliens actually prefer jazz to rock, as this assumes both alien contact and the ability to meaningfully assess their musical preferences across human genres.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is not verifiable in principle, as it depends on hypothetical alien contact and subjective opinions that may never occur or be observable, making reasonable judgment impossible.""}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""Prediction is unverifiable and lacks clear context or timeline""}","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 20,
+   ""actionability"": 10,
+   ""foresightedness"": 60,
+   ""resolution_clarity"": 30,
+   ""verifiability"": 10,
+   ""conviction"": 70,
+   ""temporal_horizon"": 10
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 10,
+    ""actionability"": 5,
+    ""foresightedness"": 10,
+    ""resolution_clarity"": 15,
+    ""verifiability"": 20,
+    ""conviction"": 70,
+    ""temporal_horizon"": 10
+  },
+  ""brief_rationale"": null
+}"
+Our startup will pivot soon.,startups,vague-trivial,2025-09-15T00:00:00Z,@founderfeelings,"[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 45,
+    ""actionability"": 25,
+    ""foresightedness"": 10,
+    ""resolution_clarity"": 15,
+    ""verifiability"": 30,
+    ""conviction"": 65,
+    ""temporal_horizon"": 60
+  },
+  ""brief_rationale"": null
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain; the speaker controls the outcome. The prediction is not verifiable in principle as 'soon' is too vague.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is too vague. 'Pivot soon' does not specify what the pivot entails, when 'soon' is, or what the outcome of the pivot will be. This lack of specificity makes it impossible to verify or assess the other quality dimensions.""
+}
+```","[PASS] {
+ ""valid"": true,
+ ""scores"": {
+   ""consequentiality"": 60,
+   ""actionability"": 50,
+   ""foresightedness"": 40,
+   ""resolution_clarity"": 30,
+   ""verifiability"": 50,
+   ""conviction"": 70,
+   ""temporal_horizon"": 20
+ },
+ ""brief_rationale"": null
+}","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 65,
+    ""actionability"": 70,
+    ""foresightedness"": 20,
+    ""resolution_clarity"": 25,
+    ""verifiability"": 40,
+    ""conviction"": 70,
+    ""temporal_horizon"": 75
+  },
+  ""brief_rationale"": null
+}","[PASS] {""valid"":true,""scores"":{""consequentiality"":60,""actionability"":50,""foresightedness"":40,""resolution_clarity"":30,""verifiability"":50,""conviction"":70,""temporal_horizon"":90},""brief_rationale"":null}","[PASS] {""valid"":true,""scores"":{""consequentiality"":80,""actionability"":60,""foresightedness"":40,""resolution_clarity"":30,""verifiability"":50,""conviction"":70,""temporal_horizon"":50},""brief_rationale"":null}","[PASS] {
+","[PASS] {
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 55,
+    ""actionability"": 40,
+    ""foresightedness"": 30,
+    ""resolution_clarity"": 20,
+    ""verifiability"": 70,
+    ""conviction"": 70,
+    ""temporal_horizon"": 45
+  },
+  ""brief_rationale"": null
+}"
+Bitcoin will be the ultimate truth of mankind.,crypto,unverifiable-narrative,2025-09-15T00:00:00Z,@maxi,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The claim is metaphysical and undefined. “Ultimate truth of mankind” lacks measurable criteria and has no timeframe, making it non-falsifiable and not verifiable in principle. It therefore fails the validity gate.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is not verifiable. \""Ultimate truth of mankind\"" is a subjective and philosophical concept that cannot be objectively measured or proven true or false.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is too vague and philosophical to be verifiable or actionable. It does not claim a specific future outcome or timeline, and the concept of 'ultimate truth' is not objectively measurable.""
+}
+```","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is too vague and lacks a verifiable outcome. 'Ultimate truth of mankind' is ambiguous and not measurable.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a philosophical or ideological statement rather than a verifiable prediction. 'Ultimate truth of mankind' is not a specific, observable future state that can be verified. It lacks concrete outcomes, timelines, or measurable criteria that would allow an observer to determine if the prediction came true.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is too vague and abstract. 'Bitcoin will be the ultimate truth of mankind' does not describe a verifiable future outcome; no observer could reasonably judge based on evidence whether it holds true.""}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is too vague and not verifiable as it doesn't assert a specific or general state about a future outcome that can be examined or judged.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Prediction invalid: Outcome ('ultimate truth of mankind') is ambiguous and lacks verifiable specificity. No objective criteria or timeline provided for evaluation.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Invalid — the claim is metaphysical and vague: 'ultimate truth of mankind' is not a measurable or verifiable future state, so the prediction cannot be evaluated.""
+}"
+"Tomorrow, yesterday will have happened.",logic,nonsense,2025-09-15T00:00:00Z,@paradoxlover,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The statement is a tautology: it makes a trivial, certain claim about time that lacks uncertainty and practical consequence. It fails the validity gate’s non-triviality/uncertainty and consequentiality requirements.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is obvious and trivial, failing the 'Outcome is uncertain' validity gate. It's a tautology, not a prediction about a future uncertain event.""
+}","[PASS] ```json
+{
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""The prediction is a logical tautology and does not describe a future outcome that is uncertain or verifiable in the real world. It is a statement about the nature of time and causality, not a prediction of a contingent event.""
+}
+```","[PASS] ```json
+{
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The prediction is a tautology and does not assert a non-trivial or uncertain future outcome.""
+}
+```","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a tautological statement about the nature of time rather than a prediction. It states an inevitable logical truth that yesterday precedes tomorrow, not an uncertain future outcome.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The statement is a tautological paradox and does not claim an uncertain future outcome; it is logically certain and trivial, failing the validity criteria.""}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is a tautology and doesn't assert a specific or meaningful future outcome.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Prediction outcome is certain (trivial tautology) and lacks consequentiality.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Invalid: the claim is a trivial tautology (by definition, tomorrow the day called 'yesterday' will have occurred). It is not an uncertain or non-obvious future outcome and carries no consequential impact, so it fails the validity gate.""
+}"
+I will decide to skip dinner tonight.,lifestyle,self-controlled,2025-09-15T12:00:00Z,@hanger,"[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""This is a self-controlled personal choice with trivial stakes and no clear impact on others who lack control over the outcome. While verifiable by the individual, it fails the gate requiring consequences for parties who do not directly control the outcome.""
+}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+  ""consequentiality"": null,
+  ""actionability"": null,
+  ""foresightedness"": null,
+  ""resolution_clarity"": null,
+  ""verifiability"": null,
+  ""conviction"": null,
+  ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is controlled by the predictor, violating the 'Consequential to some who can't control it' validity gate.""
+}","[PASS] ```json
+{
+  ""valid"": true,
+  ""scores"": {
+    ""consequentiality"": 10,
+    ""actionability"": 10,
+    ""foresightedness"": 5,
+    ""resolution_clarity"": 80,
+    ""verifiability"": 90,
+    ""conviction"": 70,
+    ""temporal_horizon"": 10
+  },
+  ""brief_rationale"": null
+}
+```","[PASS] ```json
+{
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""The outcome is not uncertain as it is a personal decision under the predictor's control.""
+}
+```","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Fails consequentiality requirement - the predictor has direct control over whether they skip dinner, so this outcome is not consequential to others who can't control it. Personal decisions about one's own immediate actions don't qualify as predictions under these criteria.""
+}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is about the predictor's own decision, which they directly control, making the outcome certain and not consequential to others who can't control it. It fails the uncertainty and consequentiality criteria.""}","[PASS] {""valid"":false,""scores"":{""consequentiality"":null,""actionability"":null,""foresightedness"":null,""resolution_clarity"":null,""verifiability"":null,""conviction"":null,""temporal_horizon"":null},""brief_rationale"":""The prediction is about the author's own decision and is not consequential to others who can't control it.""}","[PASS] {
+ ""valid"": false,
+ ""scores"": {
+   ""consequentiality"": null,
+   ""actionability"": null,
+   ""foresightedness"": null,
+   ""resolution_clarity"": null,
+   ""verifiability"": null,
+   ""conviction"": null,
+   ""temporal_horizon"": null
+ },
+ ""brief_rationale"": ""Outcome is controlled by the predictor (decision to skip dinner), failing the 'consequential to those who can't control it' validity requirement.""
+}","[PASS] {
+  ""valid"": false,
+  ""scores"": {
+    ""consequentiality"": null,
+    ""actionability"": null,
+    ""foresightedness"": null,
+    ""resolution_clarity"": null,
+    ""verifiability"": null,
+    ""conviction"": null,
+    ""temporal_horizon"": null
+  },
+  ""brief_rationale"": ""Invalid: the statement is a future, uncertain, and verifiable personal choice, but it lacks consequential impact on others who cannot control it, so it fails the 'consequential to some who can't control it' validity requirement.""
+}"

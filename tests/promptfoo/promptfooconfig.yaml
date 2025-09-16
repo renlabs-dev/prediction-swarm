@@ -1,0 +1,868 @@
+# Promptfoo configuration for evaluating OpenRouter models on the evaluator prompt
+version: 1
+outputPath: evaluations/latest_bench.html
+
+evaluateOptions:
+  maxConcurrency: 50 # stabilize latency measurements
+  # cache: false  
+  # delay: 100 
+
+providers:
+  # Flagship "best"
+  - id: openrouter:openai/gpt-5
+    label: gpt-5 (best)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      response_format:
+        type: json_object
+      usage:
+        include: true
+      showThinking: false
+
+  # Fastest (low latency / high throughput)
+  - id: openrouter:google/gemini-2.5-flash
+    label: gemini-2.5-flash (fastest)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  # Cheapest "good" option
+  - id: openrouter:google/gemini-2.5-flash-lite
+    label: gemini-2.5-flash-lite (cheapest good)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  # Best overall price/performance
+  - id: openrouter:deepseek/deepseek-chat
+    label: deepseek-v3 (best price/perf)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  # Additional current flagships (optional but nice to have)
+  - id: openrouter:anthropic/claude-opus-4.1
+    label: claude-opus-4.1
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  - id: openrouter:x-ai/grok-4
+    label: grok-4
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  - id: openrouter:meta-llama/llama-4-maverick
+    label: llama-4-maverick
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  - id: openrouter:deepseek/deepseek-r1
+    label: deepseek-r1 (reasoning)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      usage:
+        include: true
+      showThinking: false
+
+  - id: openrouter:openai/gpt-5-mini
+    label: gpt-5-mini (budget openai)
+    config:
+      temperature: 0.1
+      max_tokens: 2048
+      timeoutMs: 300000
+      response_format:
+        type: json_object
+      usage:
+        include: true
+      showThinking: false
+
+prompts:
+  - label: evaluator-system-prompt
+    raw: |
+      You evaluate predictions for validity, and if valid, for quality across a set of dimensions.
+
+      VALIDITY GATE
+
+      - Claims a future outcome: asserts a specific or general state about what will occur in the future.
+      - Outcome is uncertain: The prediction is non-trivial and non-obvious.
+      - Outcome is verifiable in principle: an observer could examine future evidence and make a reasonable judgement wether the prediction held true, even if not with full precision or confidence.
+      - Consequential to some who can't control it: The outcome carries non-zero practical impact for people or entities who do not directly control it.
+
+      Conditional predictions ("if X then Y") are valid.
+
+      Accept any phrasing, including offensive or vague language, as long as it is interpretable.
+
+      QUALITY SCORING (0-100 per dimension)
+
+      Consequentiality: how significant are the stakes of the outcome?
+
+      Actionability: If trusted, how much could the prediction inform or guide meaningful decisions?
+
+      Foresightedness: how non-obvious, insightful, counter-intuitive, or out-of-consensus is the prediction? What level of intellect or discernment is required to make it?
+
+      Resolution clarity: how specific is the claimed outcome and timeline?
+
+      Verifiability: how easy/difficult is it to verify the prediction
+      - scale from deterministic, objective (good) <> fuzzy, but anchored (medium) <> ambiguous or narrative (bad)
+
+      Conviction level: how confident is the language of the prediction?gh if the prediction is verbally hedged, its a significant reduction in quality. a neutral but definite statement like "X will be Y" is 70/100 conviction score.
+      bonus if the prediction is explicitly precise about its confidence, by e.g. stating "p(0.92)" or "im very confident about this.".
+
+      Temporal horizon: What is the expected duration until resolution. Shorter is better.
+      - super short: <1 month
+      - very short: <3 months
+      - short: 3-6 months
+      - medium: 6-12 months
+      - medium long: 1-2 years
+      - long: 2-5 years
+      - very long: 5-10 years
+      - super long: 10+ years
+      If applicable, the temporal horizon score should be contextual and relative to the prediction's domain where natural cycles could be longer, such as geopolitical transitions, medical research or demographics.
+
+      ---
+      OUTPUT FORMAT (respond in JSON only)
+      - Return exactly one JSON object as the entire response.
+      - Do not include any prose, explanations, markdown, or code fences.
+      - All score fields must be integers in [0, 100] when valid=true; use null when valid=false.
+      - The brief_rationale must be a concise string (<= 100 words) for both valid=true and valid=false.
+      - The response must be valid strict JSON (no comments, no trailing commas).
+      {
+       "valid": boolean,
+       "scores": {
+         "consequentiality": int | null,
+         "actionability": int | null,
+         "foresightedness": int | null,
+         "resolution_clarity": int | null,
+         "verifiability": int | null,
+         "conviction": int | null,
+         "temporal_horizon": int | null
+       },
+       "brief_rationale": string
+       }
+
+      Always include brief_rationale. If invalid, use it to explain why (scores must be null). If valid, briefly justify the scoring and validity decision.
+
+      ---
+      PREDICTION: {{prediction}}  
+      TOPIC: {{topic}}  
+      POSTED: {{timestamp}}  
+      SOURCE: {{author}}
+defaultAssertions:
+  - type: javascript
+    file: tests/promptfoo/validators.js
+    func: validateJsonShape
+  - type: javascript
+    file: tests/promptfoo/validators.js
+    func: validateScoreType
+
+  # Performance & cost benches
+  - type: latency
+    threshold: 10000 # ms
+  # - type: cost
+  #   threshold: 0.005 # USD per call
+
+tests:
+  - vars:
+      prediction: "The U.S. Federal Reserve will cut the target federal funds rate by at least 25 bps at its December 2025 meeting."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-09-15T08:00:00Z"
+      author: "@macrohawk"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+  - vars:
+      prediction: "p(0.7): The S&P 500 will close below 4,200 on November 29, 2025 (UTC)."
+      topic: "markets"
+      kind: "valid"
+      timestamp: "2025-09-10T12:00:00Z"
+      author: "@quantumtrader"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Ethereum will trade above $6,000 on March 31, 2026 (UTC), using CoinDesk’s ETH closing price."
+      topic: "crypto"
+      kind: "valid"
+      timestamp: "2025-07-01T00:00:00Z"
+      author: "@chainseer"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Euro area headline inflation (HICP, YoY) reported by Eurostat for December 2025 will be between 1.8% and 2.4%."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-09-05T09:00:00Z"
+      author: "@euromacro"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Brent crude oil front-month will settle above $100/barrel on or before January 31, 2026 (ICE settlement)."
+      topic: "energy"
+      kind: "valid"
+      timestamp: "2025-08-20T00:00:00Z"
+      author: "@barrelwatch"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Apple will release a foldable iPhone model available for purchase by December 31, 2026."
+      topic: "tech"
+      kind: "valid"
+      timestamp: "2025-06-30T00:00:00Z"
+      author: "@hardwareoracle"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "SpaceX Starship will complete an orbital mission and successfully recover the ship intact before July 1, 2026."
+      topic: "space"
+      kind: "valid"
+      timestamp: "2025-05-12T00:00:00Z"
+      author: "@launchlog"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The U.S. unemployment rate (BLS U-3) reported for March 2026 will be at least 5.2%."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-09-15T08:30:00Z"
+      author: "@laborlens"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "By June 30, 2026, at least one major U.S. automaker will announce a full shutdown of an EV assembly line for 3+ months."
+      topic: "autos"
+      kind: "valid"
+      timestamp: "2025-09-01T00:00:00Z"
+      author: "@supplychainnerd"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "p(0.8): A Cat-3 or stronger hurricane will make U.S. landfall by October 31, 2025 (NHC classification)."
+      topic: "weather"
+      kind: "valid"
+      timestamp: "2025-08-01T00:00:00Z"
+      author: "@stormsignal"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Microsoft will report FY2026 revenue exceeding $300B in its audited 10-K."
+      topic: "equities"
+      kind: "valid"
+      timestamp: "2025-09-15T10:00:00Z"
+      author: "@earningscall"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: '"Dune: Part Three" will gross over $1B worldwide within 90 days of release (Box Office Mojo).'
+      topic: "entertainment"
+      kind: "valid"
+      timestamp: "2025-09-15T11:00:00Z"
+      author: "@cinecast"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The ECB will end balance sheet reinvestments on all remaining APP/PEPP facilities by June 30, 2026."
+      topic: "policy"
+      kind: "valid"
+      timestamp: "2025-07-15T00:00:00Z"
+      author: "@centralbankwatch"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "India's real GDP growth for FY2025-26 will be reported at 6.0% or lower by the MOSPI first advance estimates."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-09-02T00:00:00Z"
+      author: "@emergingalpha"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "A spot Solana ETF will be approved for listing on a major U.S. exchange by December 31, 2026."
+      topic: "crypto"
+      kind: "valid"
+      timestamp: "2025-09-15T07:00:00Z"
+      author: "@etfwatcher"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The average 30-year fixed U.S. mortgage rate (Freddie Mac) will fall below 5.0% at least once before March 31, 2026."
+      topic: "housing"
+      kind: "valid"
+      timestamp: "2025-09-03T00:00:00Z"
+      author: "@ratewatch"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "An mRNA-based therapeutic (non-vaccine) will receive first FDA approval by December 31, 2026."
+      topic: "biotech"
+      kind: "valid"
+      timestamp: "2025-04-20T00:00:00Z"
+      author: "@pipelinespy"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Bitcoin’s 30-day realized volatility (CoinDesk index) will exceed 120% at least once before May 31, 2026."
+      topic: "crypto"
+      kind: "valid"
+      timestamp: "2025-09-12T00:00:00Z"
+      author: "@volsurfer"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "By June 30, 2026, at least one EU member state will implement a nationwide ban on selling new ICE-only passenger cars effective by 2030."
+      topic: "policy"
+      kind: "valid"
+      timestamp: "2025-07-11T00:00:00Z"
+      author: "@greengrid"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: '"Grand Theft Auto VI" will sell over 30 million copies in its first 60 days (publisher-reported units).'
+      topic: "gaming"
+      kind: "valid"
+      timestamp: "2025-09-06T00:00:00Z"
+      author: "@playmetrics"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Germany will enter a technical recession (two consecutive negative QoQ real GDP) by Q1 2026 (Destatis)."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-08-10T00:00:00Z"
+      author: "@eurozonewatch"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Netflix will report at least 350 million global paid memberships by Q4 2026 earnings."
+      topic: "equities"
+      kind: "valid"
+      timestamp: "2025-09-15T09:45:00Z"
+      author: "@streamstalker"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "If the Bank of Japan exits negative rates by March 2026, USDJPY will trade below 130 within 30 days of that decision."
+      topic: "fx"
+      kind: "valid"
+      timestamp: "2025-09-14T18:00:00Z"
+      author: "@carryonfx"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The average global temperature anomaly (Copernicus ERA5 monthly) for 2026 will set a new record high versus 2023."
+      topic: "climate"
+      kind: "valid"
+      timestamp: "2025-09-01T00:00:00Z"
+      author: "@climatedata"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The EU AI Act will be fully enacted with binding general-purpose AI obligations by December 31, 2026."
+      topic: "policy"
+      kind: "valid"
+      timestamp: "2025-05-15T00:00:00Z"
+      author: "@reglex"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "U.S. new housing starts (SAAR) will print below 1.1M units at least once before February 28, 2026 (Census)."
+      topic: "housing"
+      kind: "valid"
+      timestamp: "2025-09-08T00:00:00Z"
+      author: "@buildbeats"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "OpenAI will release a model that scores ≥90% on MMLU by June 30, 2026."
+      topic: "ai"
+      kind: "valid"
+      timestamp: "2025-07-07T00:00:00Z"
+      author: "@benchmarksleuth"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Saudi Aramco will announce an upstream capacity expansion project delay of ≥12 months by year-end 2026."
+      topic: "energy"
+      kind: "valid"
+      timestamp: "2025-09-13T00:00:00Z"
+      author: "@oilandalpha"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "By September 30, 2026, at least one U.S. state will implement a statewide ban on TikTok on government devices."
+      topic: "policy"
+      kind: "valid"
+      timestamp: "2025-03-22T00:00:00Z"
+      author: "@statestack"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The men’s winner of Wimbledon 2026 will not be ranked in the ATP top 3 entering the tournament."
+      topic: "sports"
+      kind: "valid"
+      timestamp: "2025-08-05T00:00:00Z"
+      author: "@grasscourtcall"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: '"The Legend of Zelda" next mainline release will win Game of the Year at The Game Awards the year it releases.'
+      topic: "gaming"
+      kind: "valid"
+      timestamp: "2025-09-11T00:00:00Z"
+      author: "@gotywhisperer"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Eurozone unemployment will rise by at least 0.7 pp from August 2025 to any monthly print before May 31, 2026."
+      topic: "macro"
+      kind: "valid"
+      timestamp: "2025-09-15T07:30:00Z"
+      author: "@eulaborlight"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "A U.S. federal court will enjoin enforcement of at least one major state-level social media age-verification law by June 30, 2026."
+      topic: "law"
+      kind: "valid"
+      timestamp: "2025-06-01T00:00:00Z"
+      author: "@docketdive"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "NVIDIA will report a quarterly gross margin below 70% at least once before December 31, 2026."
+      topic: "equities"
+      kind: "valid"
+      timestamp: "2025-09-15T09:15:00Z"
+      author: "@chipcheck"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "An OECD country will adopt a four-day workweek policy (no pay cut) across its national civil service by end-2026."
+      topic: "labor"
+      kind: "valid"
+      timestamp: "2025-02-14T00:00:00Z"
+      author: "@futureofwork"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "By March 31, 2026, at least one Big Tech firm will publicly commit to >$50B capex for AI infrastructure for the calendar year."
+      topic: "ai"
+      kind: "valid"
+      timestamp: "2025-09-09T00:00:00Z"
+      author: "@datacenterops"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "Global container shipping spot rates (Drewry WCI composite) will fall below $2,000/FEU at least once before July 31, 2026."
+      topic: "logistics"
+      kind: "valid"
+      timestamp: "2025-08-28T00:00:00Z"
+      author: "@freightflow"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  - vars:
+      prediction: "The 2026 FIFA World Cup winner will come from CONMEBOL."
+      topic: "sports"
+      kind: "valid"
+      timestamp: "2025-09-04T00:00:00Z"
+      author: "@footyforecaster"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateValidAtLeast60
+
+  # --- Tricky/invalid: trivial, self-controlled, non-future, tautology, normative, unverifiable, ambiguous ---
+
+  - vars:
+      prediction: "I will lose 50 pounds by October 14, 2025."
+      topic: "health"
+      kind: "trivial-self-controlled"
+      timestamp: "2025-09-10T00:00:00Z"
+      author: "@me"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "The sun will rise tomorrow."
+      topic: "science"
+      kind: "trivial"
+      timestamp: "2025-09-15T06:00:00Z"
+      author: "@obviousfacts"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "I will drink a glass of water today."
+      topic: "lifestyle"
+      kind: "trivial"
+      timestamp: "2025-09-15T08:10:00Z"
+      author: "@hydratedhuman"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Either Bitcoin will go up or it will go down this week."
+      topic: "crypto"
+      kind: "tautology"
+      timestamp: "2025-09-15T00:01:00Z"
+      author: "@captainobvious"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "The 2020 U.S. presidential election will be held in November 2020."
+      topic: "politics"
+      kind: "past-event"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@timetraveler"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Humanity should eliminate poverty by 2030."
+      topic: "policy"
+      kind: "normative"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@idealist"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "By next week, I will text my friend back."
+      topic: "lifestyle"
+      kind: "self-controlled"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@texter"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Aliens will think jazz is better than rock."
+      topic: "speculation"
+      kind: "unverifiable"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@ufohottake"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Our startup will pivot soon."
+      topic: "startups"
+      kind: "vague-trivial"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@founderfeelings"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Bitcoin will be the ultimate truth of mankind."
+      topic: "crypto"
+      kind: "unverifiable-narrative"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@maxi"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Tomorrow, yesterday will have happened."
+      topic: "logic"
+      kind: "nonsense"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@paradoxlover"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "I will decide to skip dinner tonight."
+      topic: "lifestyle"
+      kind: "self-controlled"
+      timestamp: "2025-09-15T12:00:00Z"
+      author: "@hanger"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "The Olympics will begin on the date they’re scheduled to begin."
+      topic: "sports"
+      kind: "scheduled-trivial"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@calendarfan"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "I will press the spacebar within five minutes."
+      topic: "metaprediction"
+      kind: "self-controlled"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@keyboardcat"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  - vars:
+      prediction: "Water will be wet tomorrow."
+      topic: "science"
+      kind: "tautology"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@wetologist"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateTrivialInvalid
+
+  # --- Vague/ambiguous but future-looking (should be low quality or invalid) ---
+
+  - vars:
+      prediction: "Technology will improve soon."
+      topic: "tech"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@broadbrush"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "Housing prices will be higher in the future."
+      topic: "housing"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@trendtalker"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "The future will bring changes."
+      topic: "general"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@fortune_cookie"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "Things will be different someday."
+      topic: "society"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@hazyseer"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "Economies will fluctuate in the future."
+      topic: "economy"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@obviousoracle"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "People will continue to adapt over time."
+      topic: "human_behavior"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@commonwisdom"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "Weather will change in the coming years."
+      topic: "climate"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@weathervane"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
+
+  - vars:
+      prediction: "Something big will eventually happen."
+      topic: "misc"
+      kind: "vague"
+      timestamp: "2025-09-15T00:00:00Z"
+      author: "@mysticmurmur"
+    assertions:
+      - type: javascript
+        file: tests/promptfoo/validators.js
+        func: validateVagueLowOrInvalid
