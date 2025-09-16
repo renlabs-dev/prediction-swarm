@@ -1,8 +1,5 @@
 # Database Management Commands
 
-set export
-
-
 # Start PostgreSQL database
 db-start:
     docker-compose up -d
@@ -58,7 +55,7 @@ evaluate-stats:
 
 # Run type checking
 typecheck:
-    uv run mypy src/ db/
+    uv run mypy src/
 
 # Run linting
 lint:
@@ -81,12 +78,3 @@ reset: db-stop db-start
     sleep 5
     just migrate-create "Initial migration: add program iterations and evaluation tables"
     just migrate-up
-
-# Promptfoo evaluation against OpenRouter models
-promptfoo:
-    mkdir -p results/promptfoo
-    npx promptfoo eval -c tests/promptfoo/promptfooconfig.yaml --no-table --max-concurrency 50 \
-
-# Open the promptfoo web viewer for the most recent run
-promptfoo-view:
-    npx promptfoo view

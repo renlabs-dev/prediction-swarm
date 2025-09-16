@@ -21,8 +21,6 @@
             python
             pkgs.uv
             pkgs.ruff
-            pkgs.nodejs_20
-            pkgs.corepack
           ];
         };
       });

@@ -38,49 +38,76 @@ def get_predictions(from_date: datetime) -> List[Prediction]:
     return api_client.fetch_all_predictions(from_date)
 
 
+def count_predictions_by_address(
+    predictions: List[Prediction],
+) -> Dict[Ss58Address, int]:
+    """Count predictions by wallet address."""
+    from collections import defaultdict
+
+    counts: Dict[Ss58Address, int] = defaultdict(int)
+    for prediction in predictions:
+        counts[prediction.inserted_by_address] += 1
+    return dict(counts)
+
+
 def scale_scores_by_quantity(
     quality_scores: Dict[Ss58Address, Dict[str, float]],
-    quantity_counts: Dict[str, int],
+    quantity_counts: Dict[Ss58Address, int],
 ) -> Dict[Ss58Address, Dict[str, float]]:
-    """Scale quality scores by prediction quantity and normalize across all finders.
+    """Combine quality scores with quantity scores using weighted approach (0.6/0.4).
+    Final scores are normalized to sum to 1.0.
 
     Args:
         quality_scores: Quality scores from calculate_normalized_scores_with_penalties()
         quantity_counts: Prediction counts by address from current iteration
 
     Returns:
-        Scaled scores with total contributions normalized to sum to 1.0
+        Weighted scores normalized to sum to 1.0
     """
-    # Calculate total contributions for each finder
-    total_contributions: Dict[Ss58Address, float] = {}
+    # Normalize quantity scores to 0-1 range
+    max_quantity = max(quantity_counts.values()) if quantity_counts else 0
+    normalized_quantity: Dict[Ss58Address, float] = {}
+    
+    for address in quality_scores.keys():
+        quantity = quantity_counts.get(address, 0)
+        normalized_quantity[address] = quantity / max_quantity if max_quantity > 0 else 0.0
+
+    # Calculate weighted scores for each finder
+    weighted_scores: Dict[Ss58Address, float] = {}
 
     for address, quality_data in quality_scores.items():
         quality_score = quality_data["final_score"]
-        prediction_count = quantity_counts.get(address, 0)
-        total_contributions[address] = quality_score * prediction_count
+        quantity_score = normalized_quantity[address]
+        
+        weighted_score = (
+            quality_score * CONFIG.QUALITY_WEIGHT + 
+            quantity_score * CONFIG.QUANTITY_WEIGHT
+        )
+        weighted_scores[address] = weighted_score
 
-    # Normalize so all contributions sum to 1.0
-    total_sum = sum(total_contributions.values())
+    # Normalize so all weighted scores sum to 1.0
+    total_sum = sum(weighted_scores.values())
 
-    # Create result with scaled final scores
+    # Create result with weighted final scores
     result: Dict[Ss58Address, Dict[str, float]] = {}
 
     for address, quality_data in quality_scores.items():
         result[address] = quality_data.copy()  # Keep original quality data
         result[address]["prediction_count"] = quantity_counts.get(address, 0)
-        result[address]["total_contribution"] = total_contributions[address]
+        result[address]["normalized_quantity"] = normalized_quantity[address]
+        result[address]["weighted_score"] = weighted_scores[address]
 
         if total_sum > 0:
-            result[address]["final_score"] = (
-                total_contributions[address] / total_sum
-            )
+            result[address]["final_score"] = weighted_scores[address] / total_sum
         else:
             result[address]["final_score"] = 0.0
 
     return result
 
 
-def get_final_scores(quantity_counts: Dict[str, int]) -> Dict[Ss58Address, int]:
+def get_final_scores(
+    quantity_counts: Dict[Ss58Address, int],
+) -> Dict[Ss58Address, int]:
     """Get final scores (quality × quantity) as integers 0-100.
 
     Args:
@@ -109,7 +136,7 @@ def get_final_scores(quantity_counts: Dict[str, int]) -> Dict[Ss58Address, int]:
     return final_scores
 
 
-def display_latest_scores(quantity_counts: Dict[str, int]) -> None:
+def display_latest_scores(quantity_counts: Dict[Ss58Address, int]) -> None:
     """Display the latest calculated scores for all finder addresses.
 
     Args:
@@ -190,7 +217,7 @@ def run_iteration() -> None:
     predictions = get_predictions(from_date)
 
     # Count predictions by address (total counts)
-    current_totals = db_service.count_predictions_by_address(predictions)
+    current_totals = count_predictions_by_address(predictions)
     print(f"Found predictions from {len(current_totals)} unique addresses")
 
     # Get previous totals and calculate deltas
