@@ -45,7 +45,8 @@ class OpenRouterClient:
         """
         try:
             # Format prediction for evaluation
-            prediction_text = self._format_prediction_for_evaluation(prediction)
+            prediction_text = self._format_prediction_for_evaluation(
+                prediction)
 
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -84,7 +85,8 @@ class OpenRouterClient:
         """
         try:
             # Format prediction for evaluation
-            prediction_text = self._format_prediction_for_evaluation(prediction)
+            prediction_text = self._format_prediction_for_evaluation(
+                prediction)
 
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -111,7 +113,7 @@ class OpenRouterClient:
             return None
 
     def _format_prediction_for_evaluation(self, prediction: Prediction) -> str:
-        """Format prediction data for AI evaluation.
+        """Format prediction data for AI evaluation in a structured, sectioned style.
 
         Args:
             prediction: The prediction to format
@@ -119,21 +121,28 @@ class OpenRouterClient:
         Returns:
             Formatted text for evaluation
         """
-        formatted = f"FULL POST: {prediction.full_post}\n"
-        formatted += f"TOPIC: {prediction.topic}\n"
-        formatted += f"POSTED: {prediction.prediction_timestamp}\n"
+        sections = []
 
+        # Prediction header
+        sections.append("PREDICTION\n---------")
+        sections.append(f"Full post:\n{prediction.full_post}")
+        sections.append(f"Topic: {prediction.topic}")
+        sections.append(f"Timestamp: {prediction.prediction_timestamp}")
+        sections.append(f"Source: @{prediction.predictor_twitter_username}")
+
+        # Optional context
         if prediction.context:
-            formatted += f"CONTEXT: {prediction.context}\n"
+            sections.append("\nContext\n-------")
+            sections.append(prediction.context)
 
+        # Optional verification claims
         if prediction.verification_claims:
-            formatted += "VERIFICATION CLAIMS:\n"
-            for i, claim in enumerate(prediction.verification_claims, 1):
-                formatted += f"{i}. {claim}\n"
+            sections.append("\nVerification Claims\n-------------------")
+            claims = "\n".join(
+                f"- {claim}" for claim in prediction.verification_claims)
+            sections.append(claims)
 
-        formatted += f"SOURCE: {prediction.predictor_twitter_username}"
-
-        return formatted
+        return "\n\n".join(sections)
 
     def _extract_score_from_response(self, response_text: str) -> Optional[int]:
         """Extract integer score from AI response using Pydantic model.
