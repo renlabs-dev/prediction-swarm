@@ -122,7 +122,7 @@ Conditional predictions ("if X then Y") are valid.
 
 - Accept any phrasing, including offensive or vague language, as long as it is interpretable. 
 - If you have at least 60/100 confidence a prediction is sarcasm or irony rather than genuine, it is invalid.
-- Implicit predictions can be valid, like clear positive or negative sentiment expressed about a specific asset or entity.
+- Implicit predictions can be valid, like clear positive or negative sentiment expressed about a specific asset or entity, but apply a very high threshold. Reject anything requiring creative interpretation or inference.
 
 QUALITY SCORING (0-100 per dimension)
 
