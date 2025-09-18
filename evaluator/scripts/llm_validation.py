@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Script to validate predictions using LLM with modified prompt for validity and confidence."""
 
+import asyncio
 import json
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 
 import pandas as pd
-from openai import OpenAI
+from openai import AsyncOpenAI
 from pydantic import BaseModel, ValidationError
 
 from src.config import CONFIG
@@ -21,7 +22,7 @@ class ValidationResponse(BaseModel):
 
 
 class LLMValidator:
-    """LLM client for prediction validation."""
+    """Async LLM client for prediction validation."""
 
     def __init__(self) -> None:
         """Initialize the LLM validator."""
@@ -30,47 +31,21 @@ class LLMValidator:
                 "OPENROUTER_API_KEY not found in environment variables"
             )
 
-        self.client = OpenAI(
+        self.client = AsyncOpenAI(
             api_key=CONFIG.OPENROUTER_API_KEY,
             base_url=CONFIG.OPENROUTER_BASE_URL,
         )
         self.model = CONFIG.OPENROUTER_MODEL
 
-        # Modified prompt for validity and confidence only
-        self.validation_prompt = r"""
-You evaluate predictions to determine if they are valid predictions and your confidence level.
+        # Use validation-only prompt from config
+        self.validation_prompt = CONFIG.VALIDATION_ONLY_PROMPT
 
-VALIDITY GATE
-A valid prediction is a verifiable claim about an uncertain future outcome that matters beyond those who control it.
-
-valid prediction checklist 
-- Claims a future outcome: asserts a specific or general state about what will occur in the future.
-- Outcome is uncertain: The prediction is non-trivial and non-obvious.
-- Outcome is verifiable in principle: an observer could examine future evidence and make a reasonable judgement whether the prediction held true, even if not with full precision or confidence.
-- Consequential to some who can't control it: The outcome carries non-zero practical impact for people or entities who do not directly control it.
-
-Conditional predictions ("if X then Y") are valid.
-
-OUTPUT FORMAT
-Return ONLY a valid JSON object. Do not include markdown code fences, backticks, or any other formatting.
-
-{
-    "is_valid": boolean,
-    "confidence": int (0-100, where 100 = completely confident, 0 = completely uncertain)
-}
-
-Example outputs:
-{"is_valid": true, "confidence": 85}
-{"is_valid": false, "confidence": 95}
-"""
-
-    def validate_prediction(
-        self, prediction_text: str, full_post: str, topic: str
+    async def validate_prediction(
+        self, full_post: str, topic: str
     ) -> Optional[Tuple[bool, int]]:
         """Validate a prediction and return validity and confidence.
 
         Args:
-            prediction_text: The extracted prediction
             full_post: The full post text
             topic: The prediction topic
 
@@ -78,9 +53,9 @@ Example outputs:
             Tuple of (is_valid, confidence) or None if validation fails
         """
         try:
-            formatted_text = f"PREDICTION: {prediction_text}\nTOPIC: {topic}\nFULL POST: {full_post}"
+            formatted_text = f"TOPIC: {topic}\nFULL POST: {full_post}"
 
-            response = self.client.chat.completions.create(
+            response = await self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": self.validation_prompt},
@@ -134,14 +109,30 @@ def validate_predictions_csv(input_file: str, output_file: str) -> None:
         print(f"Input file not found: {input_path}")
         sys.exit(1)
 
-    print(f"Loading predictions from {input_path}")
+    print(f"Loading data from {input_path}")
     df = pd.read_csv(input_path)
 
     if len(df) == 0:
-        print("No predictions found in CSV")
+        print("No data found in CSV")
         return
 
-    print(f"Loaded {len(df)} predictions")
+    print(f"Loaded {len(df)} rows")
+
+    # Detect format based on column headers
+    columns = set(df.columns.str.lower())
+    
+    if 'prediction' in columns and 'full_post' in columns:
+        # Predictions format
+        print("Detected predictions format")
+        get_full_post = lambda row: str(row["full_post"])
+        get_topic = lambda row: str(row["topic"]) if "topic" in columns else "general"
+    elif 'text' in columns:
+        # Tweets format
+        print("Detected tweets format")
+        get_full_post = lambda row: str(row["text"])
+        get_topic = lambda row: "general"  # tweets don't have topics
+    else:
+        raise ValueError(f"Unrecognized CSV format. Expected 'prediction'/'full_post' or 'text' columns. Found: {list(df.columns)}")
 
     # Initialize validator
     try:
@@ -154,24 +145,65 @@ def validate_predictions_csv(input_file: str, output_file: str) -> None:
     df["is_valid"] = None
     df["confidence"] = None
 
-    # Validate each prediction
-    for idx, row in df.iterrows():
-        print(f"Validating prediction {idx + 1}/{len(df)}: ID {row['id']}")
+    # Process rows in parallel batches of 16
+    async def process_batch(batch_rows: List[Tuple[int, pd.Series]]) -> List[Tuple[int, Optional[Tuple[bool, int]]]]:
+        tasks = []
+        for idx, row in batch_rows:
+            full_post = get_full_post(row)
+            topic = get_topic(row)
+            task = validator.validate_prediction(full_post, topic)
+            tasks.append((idx, task))
+        
+        # Actually run tasks in parallel using asyncio.gather
+        task_results = await asyncio.gather(*[task for _, task in tasks], return_exceptions=True)
+        
+        # Pair results with indices
+        results = []
+        for i, (idx, _) in enumerate(tasks):
+            result = task_results[i]
+            if isinstance(result, Exception):
+                print(f"Error in batch processing for row {idx}: {result}")
+                results.append((idx, None))
+            else:
+                results.append((idx, result))
+        return results
 
-        result = validator.validate_prediction(
-            str(row["prediction"]), str(row["full_post"]), str(row["topic"])
-        )
+    async def validate_all_rows():
+        batch_size = 16
+        total_rows = len(df)
+        total_batches = (total_rows + batch_size - 1) // batch_size
+        
+        for i in range(0, total_rows, batch_size):
+            batch_end = min(i + batch_size, total_rows)
+            batch_rows = [(idx, row) for idx, row in df.iloc[i:batch_end].iterrows()]
+            batch_num = i // batch_size + 1
+            
+            print(f"Processing batch {batch_num}/{total_batches} (rows {i+1}-{batch_end}/{total_rows})")
+            
+            batch_results = await process_batch(batch_rows)
+            
+            # Count results for this batch
+            valid_count = sum(1 for _, result in batch_results if result and result[0])
+            failed_count = sum(1 for _, result in batch_results if result is None)
+            
+            for idx, result in batch_results:
+                if result is not None:
+                    is_valid, confidence = result
+                    df.at[idx, "is_valid"] = is_valid
+                    df.at[idx, "confidence"] = confidence
+                else:
+                    df.at[idx, "is_valid"] = False  # Mark failed validations as False
+                    df.at[idx, "confidence"] = 0
+            
+            print(f"  Batch {batch_num} complete: {valid_count} valid, {len(batch_results)-valid_count-failed_count} invalid, {failed_count} failed")
 
-        if result is not None:
-            is_valid, confidence = result
-            df.at[idx, "is_valid"] = is_valid
-            df.at[idx, "confidence"] = confidence
-            print(f"  Result: valid={is_valid}, confidence={confidence}%")
-        else:
-            print("  Validation failed - skipping")
-
-    # Save results
+    # Prepare output path
     output_path = Path(output_file)
+    
+    # Run async validation
+    asyncio.run(validate_all_rows())
+
+    # Save final results
     df.to_csv(output_path, index=False)
 
     # Show summary

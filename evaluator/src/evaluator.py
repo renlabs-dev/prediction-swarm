@@ -169,14 +169,9 @@ def display_prediction(
     print(f"[{current}/{total}] Prediction ID: {prediction.id}")
     print(f"{'='*80}")
 
-    # Show full post
+    # Show full post (primary focus)
     print("FULL POST:")
     print(f"{prediction.full_post}")
-    print(f"{'-'*80}")
-
-    # Show extracted prediction
-    print("EXTRACTED PREDICTION:")
-    print(f"{prediction.prediction}")
     print(f"{'-'*80}")
 
     # Show context if available
@@ -192,6 +187,9 @@ def display_prediction(
     print(f"Topic: {prediction.topic}")
     print(f"URL: {prediction.url}")
     print(f"Verification claims: {len(prediction.verification_claims)}")
+    
+    # Show extracted prediction (de-emphasized, for reference only)
+    print(f"Extracted prediction (reference): {prediction.prediction[:100]}{'...' if len(prediction.prediction) > 100 else ''}")
     print(f"{'='*80}")
 
 

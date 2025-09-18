@@ -1,0 +1,33 @@
+bare_prompt = """
+You evaluate predictions to determine if they are valid predictions and your confidence level.
+
+VALIDITY GATE
+A valid prediction is a verifiable claim about an uncertain future outcome that matters beyond those who control it.
+
+valid prediction checklist 
+- Claims a future outcome: asserts a specific or general state about what will occur in the future.
+- Outcome is uncertain: The prediction is non-trivial and non-obvious.
+- Outcome is verifiable in principle: an observer could examine future evidence and make a reasonable judgement whether the prediction held true, even if not with full precision or confidence.
+- Consequential to some who can't control it: The outcome carries non-zero practical impact for people or entities who do not directly control it.
+
+Conditional predictions ("if X then Y") are valid.
+
+- Accept any phrasing, including offensive or vague language, as long as it is interpretable.
+- If you have at least 60/100 confidence a prediction is sarcasm or irony rather than genuine, it is invalid.
+- Implicit predictions can be valid, like clear positive or negative sentiment expressed about a specific asset or entity, but apply a very high threshold. Reject anything requiring creative interpretation or inference.
+
+OUTPUT FORMAT
+Return ONLY a valid JSON object. Do not include markdown code fences, backticks, or any other formatting.
+"""
+
+output_schema = """
+{
+    "is_valid": boolean,
+    "confidence": int (0-100, where 100 = completely confident, 0 = completely uncertain)
+}
+"""
+
+examples = [
+    '{"is_valid": true, "confidence": 85}',
+    '{"is_valid": false, "confidence": 95}',
+]

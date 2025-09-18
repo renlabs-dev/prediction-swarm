@@ -1,11 +1,31 @@
 import os
+import tomllib
 from datetime import datetime
+from pathlib import Path
 from typing import Final
 
 from dotenv import load_dotenv
+from pydantic import BaseModel
 
 # Load environment variables
 load_dotenv("env/.env")
+
+
+class PromptConfig(BaseModel):
+    """Pydantic model for prompt configuration."""
+    bare_prompt: str
+    output_schema: str
+    examples: list[str]
+
+
+def load_prompt_config(filename: str) -> PromptConfig:
+    """Load a prompt configuration from a TOML file."""
+    prompts_dir = Path(__file__).parent.parent / "prompts"
+    filepath = prompts_dir / filename
+    
+    with open(filepath, 'rb') as f:
+        data = tomllib.load(f)
+        return PromptConfig.model_validate(data)
 
 
 class MemoryUrl:
@@ -98,68 +118,31 @@ class Config:
         self.QUALITY_WEIGHT: Final[float] = 0.6
         self.QUANTITY_WEIGHT: Final[float] = 0.4
 
-        # AI Evaluation prompt
-        self.AI_EVALUATION_SYSTEM_PROMPT: Final[str] = r"""
-You evaluate predictions for validity, and if valid, for quality across a set of dimensions.
+        # Load prompt configurations from TOML files
+        self._validation_config = load_prompt_config("validity_gate.toml")
+        self._scoring_config = load_prompt_config("scoring.toml")
+        
+        # Validation-only prompt (validity gate only)
+        example_outputs = '\n        '.join(self._validation_config.examples)
+        self.VALIDATION_ONLY_PROMPT: Final[str] = f"""
+        {self._validation_config.bare_prompt}
 
-VALIDITY GATE
-A valid prediction is a verifiable claim about an uncertain future outcome that matters beyond those who control it.
+        {self._validation_config.output_schema}
 
-valid prediction checklist 
-- Claims a future outcome: asserts a specific or general state about what will occur in the future.
-- Outcome is uncertain: The prediction is non-trivial and non-obvious.
-- Outcome is verifiable in principle: an observer could examine future evidence and make a reasonable judgement whether the prediction held true, even if not with full precision or confidence.
-- Consequential to some who can't control it: The outcome carries non-zero practical impact for people or entities who do not directly control it.
+        Example outputs:
+        {example_outputs}
+        """
 
-Conditional predictions ("if X then Y") are valid.
+        scoring_example_outputs = '\n        '.join(self._scoring_config.examples)
+        # Full AI Evaluation prompt (validity + quality scoring)
+        self.AI_EVALUATION_SYSTEM_PROMPT: Final[str] = f"""
+        {self._scoring_config.bare_prompt}
 
-QUALITY SCORING (0-100 per dimension)
+        {self._scoring_config.output_schema}
 
-Consequentiality: how significant are the stakes of the outcome?
-
-Actionability: If trusted, how much could the prediction inform or guide meaningful decisions?
-
-Foresightedness: how non-obvious, insightful, counter-intuitive, or out-of-consensus is the prediction? What level of intellect or discernment is required to make it?
-
-Resolution clarity: how specific is the claimed outcome and timeline?
-
-Verifiability: how easy/difficult is it to verify the prediction
-- scale from deterministic, objective (good) <> fuzzy, but anchored (medium) <> ambiguous or narrative (bad)
-
-Conviction level: how confident is the prediction? higher confidence is better. if the prediction is verbally hedged, its a significant reduction in quality.
-bonus if the prediction is explicitly precise about its confidence, by e.g. stating "p(0.92)" or "im very confident about this.".
-
-Temporal horizon: What is the expected duration until resolution. Shorter is better.
-- super short: <1 month
-- very short: <3 months
-- short: 3-6 months
-- medium: 6-12 months
-- medium long: 1-2 years
-- long: 2-5 years
-- very long: 5-10 years
-- super long: 10+ years
-If applicable, the temporal horizon score should be contextual and relative to the prediction's domain where natural cycles could be longer, such as geopolitical transitions, medical research or demographics.
-If there is no clear temporal horizon, that is bad.
-
-OUTPUT FORMAT
-Return ONLY a valid JSON object. Do not include markdown code fences, backticks, or any other formatting.
-
-{
- "valid": boolean,
- "scores": {
-   "consequentiality": int,
-   "actionability": int,
-   "foresightedness": int,
-   "resolution_clarity": int,
-   "verifiability": int,
-   "conviction": int,
-   "temporal_horizon": int
- },
- "brief_rationale": string (max 100 words)
-}
-
-If invalid, the rationale should explain why and score null. If valid, rationale focuses on explaining those scores that are relatively high or low.
-"""
+        Example outputs:
+        {scoring_example_outputs}
+        """
 
     def get_initial_start_date(self) -> datetime:
         """Get the hardcoded initial start date for predictions."""

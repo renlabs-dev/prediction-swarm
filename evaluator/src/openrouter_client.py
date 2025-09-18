@@ -119,7 +119,7 @@ class OpenRouterClient:
         Returns:
             Formatted text for evaluation
         """
-        formatted = f"PREDICTION: {prediction.prediction}\n"
+        formatted = f"FULL POST: {prediction.full_post}\n"
         formatted += f"TOPIC: {prediction.topic}\n"
         formatted += f"POSTED: {prediction.prediction_timestamp}\n"
 

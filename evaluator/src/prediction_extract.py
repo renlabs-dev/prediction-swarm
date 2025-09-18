@@ -215,7 +215,6 @@ def run_iteration() -> None:
 
     # Fetch predictions
     predictions = get_predictions(from_date)
-
     # Count predictions by address (total counts)
     current_totals = count_predictions_by_address(predictions)
     print(f"Found predictions from {len(current_totals)} unique addresses")

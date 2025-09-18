@@ -2,7 +2,7 @@
 """Script to fetch data from memory API and save as CSV."""
 
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import requests
@@ -42,9 +42,8 @@ def fetch_and_save_predictions(output_file: str = "predictions.csv") -> None:
     """
     print("Fetching predictions from memory API...")
 
-    # Use a date far enough back to ensure we get 2000+ predictions
-    # We'll limit to 2000 after fetching
-    from_date = datetime(2025, 8, 1, tzinfo=timezone.utc)
+    # Fetch predictions from the past 2 days
+    from_date = datetime.now(timezone.utc) - timedelta(days=2)
 
     try:
         all_predictions = api_client.fetch_all_predictions(from_date)
