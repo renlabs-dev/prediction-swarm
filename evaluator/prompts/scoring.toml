@@ -62,7 +62,7 @@ output_schema = """
    "conviction": int,
    "temporal_horizon": int
  },
- "brief_rationale": string (max 100 words)
+ "brief_rationale": string (max 300 words)
 }
 """
 

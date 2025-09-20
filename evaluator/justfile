@@ -78,3 +78,15 @@ reset: db-stop db-start
     sleep 5
     just migrate-create "Initial migration: add program iterations and evaluation tables"
     just migrate-up
+
+# Promptfoo evaluation against OpenRouter models
+promptfoo:
+    # Load environment variables from the repo root .env (resolved via git root),
+    ROOT="$(git rev-parse --show-toplevel)"; \
+    if [ ! -f "$ROOT/.env" ]; then echo "Missing $ROOT/.env" >&2; exit 1; fi; \
+    set -a; . "$ROOT/.env"; set +a; \
+    npx promptfoo eval -c tests/promptfoo/promptfooconfig.yaml --no-cache --no-table --max-concurrency 50 \
+
+# Open the promptfoo web viewer for the most recent run
+promptfoo-view:
+    npx promptfoo view
