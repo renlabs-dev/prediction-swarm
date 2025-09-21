@@ -41,9 +41,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./evaluator
           push: true
-          file: Dockerfile
+          file: evaluator/Dockerfile
           tags: |
             ghcr.io/renlabs-dev/prediction-swarm-docs:${{ steps.commit.outputs.short }}
             ghcr.io/renlabs-dev/prediction-swarm-docs:${{ env.SANITIZED_REF }}
