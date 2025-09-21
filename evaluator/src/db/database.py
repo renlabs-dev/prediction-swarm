@@ -1,4 +1,3 @@
-import os
 from contextlib import contextmanager
 from typing import Generator
 
@@ -6,6 +5,8 @@ from sqlalchemy import (
     create_engine,  # pyright: ignore[reportUnknownVariableType]
 )
 from sqlalchemy.orm import Session, sessionmaker
+
+from src.config import CONFIG
 
 
 class Database:
@@ -25,12 +26,8 @@ class Database:
             return
         self._initialized = True
 
-        # Get database URL from environment - required
-        database_url = os.getenv("DATABASE_URL")
-        if not database_url:
-            raise RuntimeError(
-                "DATABASE_URL environment variable is required but not set"
-            )
+        # Get database URL from centralized config
+        database_url = CONFIG.database_url
 
         # Create engine with connection pooling
         self._engine = create_engine(

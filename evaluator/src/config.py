@@ -1,18 +1,15 @@
-import os
 import tomllib
 from datetime import datetime
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
-from dotenv import load_dotenv
 from pydantic import BaseModel
-
-# Load environment variables
-load_dotenv("env/.env")
+from pydantic_settings import BaseSettings
 
 
 class PromptConfig(BaseModel):
     """Pydantic model for prompt configuration."""
+
     bare_prompt: str
     output_schema: str
     examples: list[str]
@@ -22,8 +19,8 @@ def load_prompt_config(filename: str) -> PromptConfig:
     """Load a prompt configuration from a TOML file."""
     prompts_dir = Path(__file__).parent.parent / "prompts"
     filepath = prompts_dir / filename
-    
-    with open(filepath, 'rb') as f:
+
+    with open(filepath, "rb") as f:
         data = tomllib.load(f)
         return PromptConfig.model_validate(data)
 
@@ -54,77 +51,74 @@ class MemoryUrl:
         self.LIST_PREDICTIONS: Final[str] = f"{self.BASE}predictions/list"
 
 
-class Config:
-    """Application configuration."""
+class Config(BaseSettings):
+    """Application configuration with automatic environment variable loading."""
 
-    _instance: "Config | None" = None
+    # Environment variables (automatically loaded by Pydantic)
+    database_url: str
+    openrouter_api_key: str
+    swarm_evaluator_mnemonic: str
+    use_testnet: bool
+    
+    # Dynamic fields (set in model_post_init)
+    VALIDATION_ONLY_PROMPT: str | None = None
+    AI_EVALUATION_SYSTEM_PROMPT: str | None = None
 
-    def __new__(cls) -> "Config":
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
+    # Static configuration settings
+    PAGINATION_LIMIT: Final[int] = 1000
+    INITIAL_LOOKBACK_DAYS: Final[int] = 7
+    EVALUATION_SAMPLE_SIZE: Final[int] = 10
+    EVALUATION_MIN_SCORE: Final[int] = 0
+    EVALUATION_MAX_SCORE: Final[int] = 100
+    EVALUATION_INVALID_SCORE: Final[int] = -999
+    PENALTY_BASE: Final[float] = 0.1
+    PENALTY_ESCALATION: Final[float] = 1.5
+    EXTRACTION_ITERATION_SLEEP: Final[int] = 1 * 60 * 60
+    LLM_EVALUATION_INTERVAL: Final[int] = 5 * 60
+    CURATED_PERMISSION: Final[str] = (
+        "0x1f1eea5d5c8d1dc5648bba790eedcc04ab3510dfd6cd035b99e9b1651aa02099"
+    )
+    # CURATED_PERMISSION: Final[str] = (
+    #     "0xb6bb43bf6ad406b43e3e6d317e96188612c037dc70ae758dabc08472e2d5f960"
+    # ) # testnet 
+    OPENROUTER_BASE_URL: Final[str] = "https://openrouter.ai/api/v1"
+    OPENROUTER_MODEL: Final[str] = "google/gemini-2.5-flash"
 
-    def __init__(self) -> None:
-        if hasattr(self, "_initialized"):
-            return
-        self._initialized = True
+    class Config:
+        env_file = "env/.env"
 
-        # Pagination settings
-        self.PAGINATION_LIMIT: Final[int] = 1000  # API max limit
+    @property
+    def OPENROUTER_API_KEY(self) -> str:
+        return self.openrouter_api_key
 
-        # Time settings
-        self.INITIAL_LOOKBACK_DAYS: Final[int] = (
-            7  # Look back 7 days for first run
-        )
+    @property
+    def SWARM_EVALUATOR_MNEMONIC(self) -> str:
+        return self.swarm_evaluator_mnemonic
 
-        # Evaluation settings
-        self.EVALUATION_SAMPLE_SIZE: Final[int] = (
-            10  # Default number of predictions to evaluate
-        )
-        self.EVALUATION_MIN_SCORE: Final[int] = 0  # Minimum score
-        self.EVALUATION_MAX_SCORE: Final[int] = 100  # Maximum score
-        self.EVALUATION_INVALID_SCORE: Final[
-            int
-        ] = -999  # Invalid prediction marker
+    # Score dimension weights for weighted average calculation
+    SCORE_WEIGHTS: Final[dict[str, float]] = {
+        "consequentiality": 0.25,
+        "actionability": 0.15,
+        "foresightedness": 0.2,
+        "resolution_clarity": 0.2,
+        "verifiability": 0.1,
+        "conviction": 0.06,
+        "temporal_horizon": 0.04,
+    }
 
-        # Penalty system for invalid predictions
-        self.PENALTY_BASE: Final[float] = 0.1  # Base penalty magnitude (P)
-        self.PENALTY_ESCALATION: Final[float] = 1.5  # Escalation factor (r)
+    # Quality/Quantity weighting for final score calculation
+    QUALITY_WEIGHT: Final[float] = 0.6
+    QUANTITY_WEIGHT: Final[float] = 0.4
 
-        self.EXTRACTION_ITERATION_SLEEP: Final[int] = 1 * 60 * 60
-        self.LLM_EVALUATION_INTERVAL: Final[int] = 5 * 60  # 5 minutes
-
-        self.CURATED_PERMISSION: Final[str] = (
-            "0x1f1eea5d5c8d1dc5648bba790eedcc04ab3510dfd6cd035b99e9b1651aa02099"
-        )
-
-        # OpenRouter AI Evaluation settings
-        self.OPENROUTER_API_KEY: Final[str] = os.getenv("OPENROUTER_URL", "")
-        self.OPENROUTER_BASE_URL: Final[str] = "https://openrouter.ai/api/v1"
-        self.OPENROUTER_MODEL: Final[str] = "google/gemini-2.5-flash"
-
-        # Score dimension weights for weighted average calculation
-        self.SCORE_WEIGHTS: Final[dict[str, float]] = {
-            "consequentiality": 0.25,
-            "actionability": 0.15,
-            "foresightedness": 0.2,
-            "resolution_clarity": 0.2,
-            "verifiability": 0.1,
-            "conviction": 0.06,
-            "temporal_horizon": 0.04,
-        }
-
-        # Quality/Quantity weighting for final score calculation
-        self.QUALITY_WEIGHT: Final[float] = 0.6
-        self.QUANTITY_WEIGHT: Final[float] = 0.4
-
+    def model_post_init(self, _context: Any) -> None:
+        """Initialize prompts after Pydantic model creation."""
         # Load prompt configurations from TOML files
         self._validation_config = load_prompt_config("validity_gate.toml")
         self._scoring_config = load_prompt_config("scoring.toml")
-        
+
         # Validation-only prompt (validity gate only)
-        example_outputs = '\n        '.join(self._validation_config.examples)
-        self.VALIDATION_ONLY_PROMPT: Final[str] = f"""
+        example_outputs = "\n        ".join(self._validation_config.examples)
+        self.VALIDATION_ONLY_PROMPT = f"""
         {self._validation_config.bare_prompt}
 
         {self._validation_config.output_schema}
@@ -133,9 +127,11 @@ class Config:
         {example_outputs}
         """
 
-        scoring_example_outputs = '\n        '.join(self._scoring_config.examples)
+        scoring_example_outputs = "\n        ".join(
+            self._scoring_config.examples
+        )
         # Full AI Evaluation prompt (validity + quality scoring)
-        self.AI_EVALUATION_SYSTEM_PROMPT: Final[str] = f"""
+        self.AI_EVALUATION_SYSTEM_PROMPT = f"""
         {self._scoring_config.bare_prompt}
 
         {self._scoring_config.output_schema}
@@ -152,4 +148,4 @@ class Config:
 
 # Global instances
 MEMORY_URL = MemoryUrl()
-CONFIG = Config()
+CONFIG = Config()  # type: ignore[call-arg]  # Pydantic BaseSettings loads from environment automatically

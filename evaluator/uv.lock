@@ -1378,7 +1378,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.5" },
     { name = "sqlalchemy", specifier = ">=2.0.43" },
-    { name = "torusdk", specifier = ">=0.2.4.1" },
+    { name = "torusdk", specifier = ">=0.2.4.3" },
 ]
 
 [package.metadata.requires-dev]
@@ -1398,7 +1398,7 @@ wheels = [
 
 [[package]]
 name = "torusdk"
-version = "0.2.4.1"
+version = "0.2.4.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -1416,14 +1416,14 @@ dependencies = [
     { name = "typer" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/32/3914d0954a588a15c3c631018dded58d383911c2d2d8342f849290a0ff39/torusdk-0.2.4.1.tar.gz", hash = "sha256:d88b0771e3453fd0129a700d6fb3f27f51cfc0c709b14247feb8da751c7b4558", size = 57138 }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/be/6fe28a76f67722ba5b3717d8bbc848c130f125936daddf6f7b6028792e23/torusdk-0.2.4.3.tar.gz", hash = "sha256:37bd34c9cfca70e4aa50af11aa1c7803f83f608a361ddc35603859982c616342", size = 57645 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/63/672ae73ccc1bf4e215cb6dfb11b28ffee1df29dedbc42e9d383e01158d0c/torusdk-0.2.4.1-py3-none-any.whl", hash = "sha256:a7dd35ed6db3a33f7c645079020b506aae834e7b49e98471d7c3eb299a1003d6", size = 65790 },
+    { url = "https://files.pythonhosted.org/packages/a7/f9/b266a7681a522abece1de2495989fe8c96ace5ff64a54c57ffbb9128ca38/torusdk-0.2.4.3-py3-none-any.whl", hash = "sha256:9faed8bbdc10c265ae12304581f8b1c40d4cdcc665a1c55ae38f10a970f07ef4", size = 66271 },
 ]
 
 [[package]]
 name = "torustrateinterface"
-version = "0.1.0"
+version = "0.1.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
@@ -1442,9 +1442,9 @@ dependencies = [
     { name = "websocket-client" },
     { name = "xxhash" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/24/89/6849531281e3620416d51732ff8e5d9c299439161bf87ffcbb3ad2d1051b/torustrateinterface-0.1.0.tar.gz", hash = "sha256:d41cd994a09d5cd105cf3e4b438f7f53ae881dc60e4661bccb1391c37779e42a", size = 49325 }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/23/0aa98db211c30f3cfafc3e3b52267baf3fcc73f4a8a9a8efaa446ae0946e/torustrateinterface-0.1.3.tar.gz", hash = "sha256:c306924431f0da8ba84c632cb052f3b4a0eca9a74f414222f0e84598cf69e53a", size = 50307 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6e/11/e1d955a15e36cf2472a0ebb5c850c1d2bef9683eef6bc9bb5ab2aca54434/torustrateinterface-0.1.0-py3-none-any.whl", hash = "sha256:905975d6a48b9cf8c65cc989e70bf6bf764ef8950bf2bdfa3a791498fc0138fb", size = 59565 },
+    { url = "https://files.pythonhosted.org/packages/73/c0/7a8b06b6e20a8747c3a739ac530c728eb7c588e8430311ca0067fadc0df5/torustrateinterface-0.1.3-py3-none-any.whl", hash = "sha256:57bcc373a39002633a21e2691953a3e706638b86179b7c2785365c14d0f3e065", size = 60466 },
 ]
 
 [[package]]

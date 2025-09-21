@@ -8,17 +8,16 @@ from sqlalchemy import pool
 # Add the src directory to the path so we can import models
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-# Import our models
+# Import our models and config
 from db.models import Base
+from config import CONFIG
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
-# Set the database URL from environment variable
-database_url = os.getenv("DATABASE_URL")
-if database_url:
-    config.set_main_option("sqlalchemy.url", database_url)
+# Set the database URL from centralized config
+config.set_main_option("sqlalchemy.url", CONFIG.database_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -48,7 +47,7 @@ def run_migrations_offline() -> None:
 
     """
     # url = config.get_alembic_option("sqlalchemy.url")
-    url = os.getenv("DATABASE_URL")
+    url = CONFIG.database_url
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -67,18 +66,9 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    import dotenv
     from sqlalchemy import create_engine
 
-    # Load environment variables from the correct .env file
-    env_path = os.path.join(os.path.dirname(__file__), "../../../env/.env")
-    dotenv.load_dotenv(env_path)
-    database_url = os.getenv("DATABASE_URL")
-
-    if not database_url:
-        raise RuntimeError("DATABASE_URL environment variable is required")
-
-    connectable = create_engine(database_url, poolclass=pool.NullPool)
+    connectable = create_engine(CONFIG.database_url, poolclass=pool.NullPool)
 
     with connectable.connect() as connection:
         context.configure(

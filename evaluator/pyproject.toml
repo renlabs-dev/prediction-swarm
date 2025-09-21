@@ -14,7 +14,7 @@ dependencies = [
     "python-dotenv>=1.1.1",
     "requests>=2.32.5",
     "sqlalchemy>=2.0.43",
-    "torusdk>=0.2.4.1",
+    "torusdk>=0.2.4.3",
 ]
 
 [dependency-groups]
@@ -41,12 +41,7 @@ warn_unused_ignores = true
 warn_no_return = true
 warn_unreachable = true
 strict_equality = true
-exclude = [
-    "scripts/*",
-    "scripts/**/*"
-]
+exclude = ["scripts/*", "scripts/**/*"]
 
 [tool.pylance]
-exclude = [
-    "**/scripts/**"
-]
+exclude = ["**/scripts/**"]

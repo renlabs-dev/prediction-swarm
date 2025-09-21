@@ -1,10 +1,11 @@
+import argparse
 from datetime import datetime, timezone
 from time import sleep
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from torusdk._common import get_node_url
 from torusdk.client import TorusClient
-from torusdk.key import check_ss58_address
+from torusdk.key import check_ss58_address, Keypair
 from torusdk.types.types import (  # pyright: ignore[reportMissingTypeStubs]
     Ss58Address,
 )
@@ -13,8 +14,9 @@ from .api_client import api_client
 from .config import CONFIG
 from .db.db_service import db_service
 from .schemas import Prediction
+from .stream_weights import update_curated_permission_weights
 
-client = TorusClient(get_node_url(use_testnet=False))
+client = TorusClient(get_node_url(use_testnet=CONFIG.use_testnet))
 
 
 def get_curated_permission_recipients() -> list[Ss58Address]:
@@ -166,7 +168,7 @@ def display_latest_scores(quantity_counts: Dict[Ss58Address, int]) -> None:
     )
 
     print(
-        f"{'Rank':<4} {'Address':<16} {'Quality':<7} {'Count':<5} {'Contrib':<7} {'Final%':<7}"
+        f"{'Rank':<4} {'Address':<16} {'Quality':<7} {'Count':<5} {'Penalty':<7} {'Final%':<7}"
     )
     print(f"{'-'*4} {'-'*16} {'-'*7} {'-'*5} {'-'*7} {'-'*7}")
 
@@ -176,33 +178,42 @@ def display_latest_scores(quantity_counts: Dict[Ss58Address, int]) -> None:
             "final_score"
         ]  # Normalized quality score across addresses
         prediction_count = int(score_data["prediction_count"])
-        contribution = score_data["total_contribution"]
+        penalty = score_data.get("penalty", 0.0)
         final_score_pct = score_data["final_score"] * 100
 
         print(
-            f"{rank:<4} {address_short:<16} {quality_score:<7.3f} {prediction_count:<5} {contribution:<7.3f} {final_score_pct:<7.2f}"
+            f"{rank:<4} {address_short:<16} {quality_score:<7.3f} {prediction_count:<5} {penalty:<7.3f} {final_score_pct:<7.2f}"
         )
 
     # Summary statistics
     total_addresses = len(scores)
     total_score_sum = sum(s["final_score"] for s in scores.values())
-    total_predictions = sum(s["prediction_count"] for s in scores.values())
-    total_contribution = sum(s["total_contribution"] for s in scores.values())
+    total_predictions = sum(int(s["prediction_count"]) for s in scores.values())
+    avg_penalty = sum(s.get("penalty", 0.0) for s in scores.values()) / len(scores) if scores else 0
 
     print("\nSUMMARY:")
     print(f"Total addresses evaluated: {total_addresses}")
     print(f"Total predictions in period: {total_predictions}")
-    print(f"Total contribution value: {total_contribution:.3f}")
+    print(f"Average penalty: {avg_penalty:.3f}")
     print(
         f"Final score distribution: {total_score_sum * 100:.1f}% (should be 100.0%)"
     )
     print(f"{'='*80}")
 
 
-def run_iteration() -> None:
-    """Run a complete iteration: fetch predictions and store results in database."""
+def run_iteration(dry_run: bool = False) -> None:
+    """Run a complete iteration: fetch predictions and store results in database.
+    
+    Args:
+        dry_run: If True, read from chain/db but skip all writes
+    """
     run_timestamp = datetime.now(timezone.utc)
-    print(f"Starting iteration at {run_timestamp}")
+    
+    if dry_run:
+        print(f"DRY RUN MODE - Starting iteration at {run_timestamp}")
+        print("  No database writes or blockchain updates will be performed")
+    else:
+        print(f"Starting iteration at {run_timestamp}")
 
     # Determine the 'from' date for fetching predictions
     last_run = db_service.get_last_run_timestamp()
@@ -235,38 +246,80 @@ def run_iteration() -> None:
         total = current_totals[address]
         print(f"  {address[:8]}...{address[-8:]}: +{delta} (total: {total})")
 
-    # Store iteration in database
-    iteration = db_service.store_iteration(
-        run_timestamp=run_timestamp,
-        predictions=predictions,
-        address_deltas=address_deltas,
-        address_totals=current_totals,
-    )
-
-    print(f"Stored iteration {iteration.id} in database")
+    if dry_run:
+        print("\nDRY RUN: Would store iteration in database")
+        print(f"  - Run timestamp: {run_timestamp}")
+        print(f"  - Predictions count: {len(predictions)}")
+        print(f"  - Address deltas count: {len(address_deltas)}")
+        print(f"  - Address totals count: {len(current_totals)}")
+    else:
+        # Store iteration in database
+        iteration = db_service.store_iteration(
+            run_timestamp=run_timestamp,
+            predictions=predictions,
+            address_deltas=address_deltas,
+            address_totals=current_totals,
+        )
+        print(f"Stored iteration {iteration.id} in database")
 
     # Track finder status (active/inactive based on curated permissions)
     print("Tracking finder status...")
     curated_finders = get_curated_permission_recipients()
-    db_service.track_finder_status(
-        iteration_id=iteration.id,
-        active_finder_keys={
-            check_ss58_address(key) for key in current_totals.keys()
-        },
-        curated_permission_keys=curated_finders,
-    )
-    print(
-        f"Tracked {len(curated_finders)} curated finders, {len(current_totals)} active this iteration"
-    )
+    
+    if dry_run:
+        print("\nDRY RUN: Would track finder status")
+        print(f"  - Curated finders: {len(curated_finders)}")
+        print(f"  - Active this iteration: {len(current_totals)}")
+        _iteration_id = "DRY_RUN"
+    else:
+        db_service.track_finder_status(
+            iteration_id=iteration.id,
+            active_finder_keys={
+                check_ss58_address(key) for key in current_totals.keys()
+            },
+            curated_permission_keys=curated_finders,
+        )
+        print(
+            f"Tracked {len(curated_finders)} curated finders, {len(current_totals)} active this iteration"
+        )
+        _iteration_id = iteration.id
 
     # Calculate and display latest scores if evaluation sessions exist
     display_latest_scores(address_deltas)
+    
+    # Update stream permission weights on blockchain
+    final_scores = get_final_scores(address_deltas)
+    if final_scores:
+        if dry_run:
+            print("\nDRY RUN: Would update stream permission weights")
+            print("  Final scores that would be set:")
+            for address, score in sorted(
+                final_scores.items(), key=lambda x: x[1], reverse=True
+            )[:5]:  # Show top 5
+                print(f"    {address[:8]}...{address[-6:]}: {score}")
+            if len(final_scores) > 5:
+                print(f"    ... and {len(final_scores) - 5} more addresses")
+        else:
+            print("Updating stream permission weights...")
+            success = update_curated_permission_weights(final_scores)
+            if success:
+                print("Stream permission weights updated successfully")
+            else:
+                print("Failed to update stream permission weights")
+    else:
+        print("No final scores available - skipping stream weight update")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Extract predictions and update scores")
+    parser.add_argument(
+        "--dry-run", 
+        action="store_true", 
+        help="Perform a dry run (read only, no database writes or blockchain updates)"
+    )
+    
+    args = parser.parse_args()
+    
     while True:
-        # recipients = get_curated_permission_recipients()
-        # print(f"Found {recipients} curated permission recipients")
-        run_iteration()
-        exit(0)
+        run_iteration(dry_run=args.dry_run)
         sleep(CONFIG.EXTRACTION_ITERATION_SLEEP)
