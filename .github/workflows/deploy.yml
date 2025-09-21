@@ -45,8 +45,8 @@ jobs:
           push: true
           file: evaluator/Dockerfile
           tags: |
-            ghcr.io/renlabs-dev/prediction-swarm-docs:${{ steps.commit.outputs.short }}
-            ghcr.io/renlabs-dev/prediction-swarm-docs:${{ env.SANITIZED_REF }}
+            ghcr.io/renlabs-dev/prediction-swarm-evaluator:${{ steps.commit.outputs.short }}
+            ghcr.io/renlabs-dev/prediction-swarm-evaluator:${{ env.SANITIZED_REF }}
 
   # clean-stale:
   #   runs-on: ubicloud-standard-2
