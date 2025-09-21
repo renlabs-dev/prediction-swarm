@@ -12,8 +12,7 @@ RUN apt-get update && apt-get install -y \
     && mkdir -p logs
 
 # Install uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Copy dependency files
 COPY pyproject.toml ./
