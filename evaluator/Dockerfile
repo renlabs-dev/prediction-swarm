@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p logs
 
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -23,9 +24,6 @@ RUN uv sync
 # Copy application code
 COPY src/ ./src/
 COPY prompts/ ./prompts/
-
-# Create logs directory
-RUN mkdir -p logs
 
 # Default command (will be overridden by docker-compose)
 CMD ["uv", "run", "python", "-m", "src.evaluator"]
