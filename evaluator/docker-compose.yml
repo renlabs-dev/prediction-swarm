@@ -1,21 +1,73 @@
+version: '3.8'
+
 services:
+  # PostgreSQL Database
   postgres:
     image: postgres:17-alpine
-    container_name: swarm-evaluator-postgres
+    container_name: swarm-evaluator-db
     environment:
-      POSTGRES_DB: swarm_evaluator
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: swarm_evaluator
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d swarm_evaluator"]
-      interval: 5s
-      timeout: 3s
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
       retries: 5
+    restart: unless-stopped
+    networks:
+      - swarm-network
+
+  # Evaluator Service - Evaluates predictions and stores scores
+  evaluator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: swarm-evaluator-service
+    command: uv run python -m src.evaluator
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/swarm_evaluator
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      SWARM_EVALUATOR_MNEMONIC: ${SWARM_EVALUATOR_MNEMONIC}
+      USE_TESTNET: ${USE_TESTNET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - swarm-network
+    volumes:
+      - ./logs:/app/logs
+
+  # Prediction Extractor Service - Fetches predictions and updates on-chain weights  
+  prediction-extractor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: swarm-prediction-extractor
+    command: uv run python -m src.prediction_extract
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/swarm_evaluator
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      SWARM_EVALUATOR_MNEMONIC: ${SWARM_EVALUATOR_MNEMONIC}
+      USE_TESTNET: ${USE_TESTNET}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - swarm-network
+    volumes:
+      - ./logs:/app/logs
 
 volumes:
   postgres_data:
     driver: local
+
+networks:
+  swarm-network:
+    driver: bridge
