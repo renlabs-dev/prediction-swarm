@@ -17,7 +17,7 @@ class PromptConfig(BaseModel):
 
 def load_prompt_config(filename: str) -> PromptConfig:
     """Load a prompt configuration from a TOML file."""
-    prompts_dir = Path(__file__).parent.parent / "prompts"
+    prompts_dir = Path(__file__).resolve().parent.parent / "prompts"
     filepath = prompts_dir / filename
 
     with open(filepath, "rb") as f:
