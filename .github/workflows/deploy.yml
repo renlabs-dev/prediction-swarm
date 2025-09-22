@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  docker-build:
     if: |
       !contains(github.event.head_commit.message, 'skip build')
     permissions: write-all
@@ -48,20 +48,20 @@ jobs:
             ghcr.io/renlabs-dev/prediction-swarm-evaluator:${{ steps.commit.outputs.short }}
             ghcr.io/renlabs-dev/prediction-swarm-evaluator:${{ env.SANITIZED_REF }}
 
-  # clean-stale:
-  #   runs-on: ubicloud-standard-2
-  #   container:
-  #     image: ghcr.io/renlabs-dev/devops-ci:latest
+  clean-stale:
+    runs-on: ubicloud-standard-2
+    container:
+      image: ghcr.io/renlabs-dev/devops-ci:latest
 
-  #   env:
-  #     VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-  #     VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
-  #     VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
+    env:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
 
-  #   steps:
-  #     - name: Setup Kubernetes authentication
-  #       run: /apps/k8s_auth_w_approle_sa.sh
+    steps:
+      - name: Setup Kubernetes authentication
+        run: /apps/k8s_auth_w_approle_sa.sh
 
-  #     - name: Clean stale releases
-  #       run: |
-  #         /apps/clean_stale_releases.sh torus-prod-prediction-swarm
+      - name: Clean stale releases
+        run: |
+          /apps/clean_stale_releases.sh torus-prod-prediction-swarm
