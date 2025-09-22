@@ -65,3 +65,90 @@ jobs:
       - name: Clean stale releases
         run: |
           /apps/clean_stale_releases.sh torus-prod-prediction-swarm
+
+  deploy:
+    needs: [docker-build, clean-stale]
+    if: |
+      always() &&
+      (needs.clean-stale.result == 'success') &&
+      (needs.docker-build.result == 'success' || needs.docker-build.result == 'skipped')
+    runs-on: ubicloud-standard-2
+    container:
+      image: ghcr.io/renlabs-dev/devops-ci:latest
+
+    env:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
+      APP_NAME: evaluator
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Kubernetes authentication
+        run: /apps/k8s_auth_w_approle_sa.sh
+
+      - name: Add and update Helm repositories
+        run: |
+          helm repo add renlabs https://charts.renlabs.dev/
+          helm repo update
+
+      - id: commit
+        uses: prompt/actions-commit-hash@v3
+
+      - name: Set environment variables
+        run: |
+          echo "ENV_NAME=prod" >> $GITHUB_ENV
+          echo "NAMESPACE=torus-prod-prediction-swarm" >> $GITHUB_ENV
+
+      - name: Install shared resources
+        run: |
+          helm template torus-${ENV_NAME}-aux \
+            -f helm/values-utils.yaml \
+            -n ${NAMESPACE} \
+            --set environmentName=${ENV_NAME} \
+            renlabs/utils | kubectl apply -f -
+
+      - name: Deploy application (new tag)
+        id: deploy-new
+        if: needs.docker-build.result == 'success'
+        working-directory: ${{ env.APP_NAME }}
+        run: |
+          helmfile sync -e ${ENV_NAME} --set deployment.image.tag=${{ steps.commit.outputs.short }}
+
+      - name: Install helm diff plugin
+        if: needs.docker-build.result == 'skipped'
+        working-directory: ${{ env.APP_NAME }}
+        run: |
+          if ! helm plugin list | grep -q '^diff'; then
+            helm plugin install https://github.com/databus23/helm-diff
+          fi
+
+      - name: Deploy application (apply diff only)
+        id: deploy-diff
+        if: needs.docker-build.result == 'skipped'
+        working-directory: ${{ env.APP_NAME }}
+        run: |
+          export RELEASE_NAME="$(helmfile -e ${ENV_NAME} list --output json | jq -r '.[].name')"
+          export IMAGE_TAG="$(helm get values "${RELEASE_NAME}" -n "${NAMESPACE}" --output json | jq -r '.deployment.image.tag')"
+
+          # Temporarily disable error handling
+          set +e
+          helmfile diff -e ${ENV_NAME} --set deployment.image.tag=${IMAGE_TAG} --detailed-exitcode
+          DIFF_EXIT_CODE=$?
+
+          # Re-enable error handling
+          set -eo pipefail
+
+          if [ "$DIFF_EXIT_CODE" == "0" ]; then
+            echo "No changes detected, skipping sync"
+            echo "changes_applied=false" >> $GITHUB_OUTPUT
+          elif [ "$DIFF_EXIT_CODE" == "2" ]; then
+            echo "Changes detected, applying updates..."
+            helmfile sync -e ${ENV_NAME} --set deployment.image.tag=${IMAGE_TAG}
+            echo "changes_applied=true" >> $GITHUB_OUTPUT
+          else
+            echo "Error running helmfile diff with exit code: $DIFF_EXIT_CODE"
+            exit 1
+          fi

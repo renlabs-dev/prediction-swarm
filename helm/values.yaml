@@ -1,0 +1,22 @@
+service:
+  enabled: false
+
+deployment:
+  reloadOnChange: true
+
+  env:
+    USE_TESTNET:
+      valueFrom:
+        configMapKeyRef:
+          name: '{{ template "application.name" . }}-config'
+          key: use_testnet
+
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: false
+
+configMap:
+  enabled: true
+  files:
+    config:
+      use_testnet: "{{ .Values.useTestnet }}"

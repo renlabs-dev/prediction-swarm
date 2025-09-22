@@ -1,0 +1,30 @@
+deployment:
+  replicas: 0 # TEMP
+
+  image:
+    repository: ghcr.io/renlabs-dev/prediction-swarm-evaluator
+
+  additionalLabels:
+    app: prediction-swarm-evaluator
+
+  podLabels:
+    app: prediction-swarm-evaluator
+
+  command: ["uv", "run", "python", "-m"]
+
+  env:
+    DATABASE_URL:
+      valueFrom:
+        secretKeyRef:
+          name: "torus-{{ .Values.environmentName }}-prediction-swarm-secret"
+          key: evaluator_db_url
+    OPENROUTER_API_KEY:
+      valueFrom:
+        secretKeyRef:
+          name: "torus-{{ .Values.environmentName }}-prediction-swarm-secret"
+          key: evaluator_openrouter_api_key
+    SWARM_EVALUATOR_MNEMONIC:
+      valueFrom:
+        secretKeyRef:
+          name: "torus-{{ .Values.environmentName }}-prediction-swarm-secret"
+          key: evaluator_swarm_mnemonic

@@ -1,0 +1,66 @@
+environments:
+  # dev:
+  #   values:
+  #     - ../helm/values.yaml
+  #     - values.yaml
+  #     - releasePrefix: dev-prediction
+  #     - environmentName: dev
+  #     - namespace: torus-dev-prediction-swarm
+  #     - useTestnet: true
+  prod:
+    values:
+      - ../helm/values.yaml
+      - values.yaml
+      - releasePrefix: prediction
+      - environmentName: prod
+      - namespace: torus-prod-prediction-swarm
+      - useTestnet: false
+---
+helmDefaults:
+  wait: true
+  createNamespace: false
+
+repositories:
+  - name: renlabs
+    url: https://charts.renlabs.dev/
+
+releases:
+  - name: "{{ .Values.releasePrefix }}-evaluator"
+    namespace: "{{ .Values.namespace }}"
+    chart: renlabs/application
+    values:
+      - ../helm/values.yaml.gotmpl
+      - deployment:
+          containerName: evaluator
+          args: ["src.evaluator"]
+          additionalLabels:
+            role: evaluator
+          podLabels:
+            role: evaluator
+          # resources:
+          #   limits:
+          #     memory: 500Mi
+          #     cpu: 1
+          #   requests:
+          #     memory: 300Mi
+          #     cpu: 0.1
+
+  - name: "{{ .Values.releasePrefix }}-extractor"
+    namespace: "{{ .Values.namespace }}"
+    chart: renlabs/application
+    values:
+      - ../helm/values.yaml.gotmpl
+      - deployment:
+          containerName: prediction-extractor
+          args: ["src.prediction_extract"]
+          additionalLabels:
+            role: prediction-extractor
+          podLabels:
+            role: prediction-extractor
+          # resources:
+          #   limits:
+          #     memory: 500Mi
+          #     cpu: 1
+          #   requests:
+          #     memory: 300Mi
+          #     cpu: 0.1
